@@ -63,7 +63,6 @@ if (!errorInput) {
       console.log('The amount of the shapes sides is not within 3-10.')
       break
   }
-    } else {
 } else {
   console.log('Please enter a valid number')
 }
