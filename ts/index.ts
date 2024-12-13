@@ -8,7 +8,6 @@
 
 import { createPrompt } from 'bun-promptx'
 
-// print Hello, World!
 console.log('This program calculates the dimentions of a shapes with 3-10 sides.')
 
 const sideAmountInput = createPrompt('\nHow many sides does your shape have? ')
@@ -64,6 +63,7 @@ if (!errorInput) {
       console.log('The amount of the shapes sides is not within 3-10.')
       break
   }
+    } else {
 } else {
   console.log('Please enter a valid number')
 }
