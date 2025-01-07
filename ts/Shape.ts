@@ -28,6 +28,11 @@ export class Shape {
   protected amountOfSides: number
 
   /**
+   * The amount of diagonals the shape has.
+   */
+  protected amountOfDiagonals: number
+
+  /**
    * Every angle of the shape.
    */
   protected angles: number[]
@@ -42,36 +47,102 @@ export class Shape {
     this.sideLengths = sideLengthValues
     this.diagonalLengths = diagonalLengthValues
     this.amountOfSides = sideLengthValues.length
-    switch (sideLengthValues.length) {
-      case 3:
-        this.name = 'triangle'
-        break
-      case 4:
-        this.name = 'rectangle'
-        break
-      case 5:
-        this.name = 'pentagon'
-        break
-      case 6:
-        this.name = 'hexagon'
-        break
-      case 7:
-        this.name = 'heptagon'
-        break
-      case 8:
-        this.name = 'octogon'
-        break
-      case 9:
-        this.name = 'nonagon'
-        break
-      case 10:
-        this.name = 'decagon'
-        break
-      default:
-        this.name = 'inValid'
-        break
+    this.amountOfDiagonals = diagonalLengthValues.length
+    this.angles = new Array(sideLengthValues.length).fill(0)
+    if (sideLengthValues.length === diagonalLengthValues.length + 3) {
+      switch (sideLengthValues.length) {
+        case 3:
+          this.name = 'Triangle'
+          break
+        case 4:
+          this.name = 'Rectangle'
+          break
+        case 5:
+          this.name = 'Pentagon'
+          break
+        case 6:
+          this.name = 'Hexagon'
+          break
+        case 7:
+          this.name = 'Heptagon'
+          break
+        case 8:
+          this.name = 'Octogon'
+          break
+        case 9:
+          this.name = 'Nonagon'
+          break
+        case 10:
+          this.name = 'Decagon'
+          break
+        default:
+          this.name = 'inValid'
+          break
+      }
+    } else {
+      this.name = 'inValid'
     }
-    for (let counter = 0; counter < sideLengthValues.length; counter++)
-    this.angles[counter] = 0
+  }
+
+  /**
+   * The getter for the name.
+   *
+   * @return name of shape
+   */
+  public getName (): string {
+    if (this.isValid()) {
+      return this.name
+    } else {
+      return 'Invalid Shape'
+    }
+  }
+
+  /**
+   * The getter for a single side length.
+   *
+   * @param sideNumber
+   * @return length of side
+   */
+  public getSideLength (sideNumber: number): number {
+    if (sideNumber <= this.amountOfSides && sideNumber > 0) {
+      sideNumber--
+      return this.sideLengths[sideNumber]
+    } else {
+      return -1
+    }
+  }
+
+  /**
+   * This method finds the perimeter of the shape.
+   *
+   * @return {number} of perimeter
+   */
+  public perimeter (): number {
+    // find the sum of all of the lengths in the array
+    return this.sideLengths.reduce((a, b) => a + b)
+  }
+
+  /**
+   * This method checks to see if the shape is a regular shape.
+   */
+  public isRegular (): boolean {
+    // ended first coding session here.
+    return true
+  }
+
+  /**
+   * Check if the user inputs make a valid shape.
+   *
+   * @return whether or not the shape is valid
+   */
+  protected isValid (): boolean {
+    if (this.name === 'inValid') {
+      return false
+    } else {
+      // if (sumOfAngles() !== (this.numberOfSides -2) * 180) {
+      // return false
+      // } else {
+      return true
+    }
   }
 }
