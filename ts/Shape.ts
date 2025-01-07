@@ -43,7 +43,7 @@ export class Shape {
    * @param sideLengthValues
    * @param diagonalLengthValues
    */
-  constructor(sideLengthValues: number[], diagonalLengthValues: number[]) {
+  constructor (sideLengthValues: number[], diagonalLengthValues: number[]) {
     this.sideLengths = sideLengthValues
     this.diagonalLengths = diagonalLengthValues
     this.amountOfSides = sideLengthValues.length
@@ -124,9 +124,17 @@ export class Shape {
 
   /**
    * This method checks to see if the shape is a regular shape.
+   *
+   * @return is the shape is regular
    */
   public isRegular (): boolean {
-    // ended first coding session here.
+    for (let anchorComparator = 0; anchorComparator < this.amountOfSides; anchorComparator++) {
+      for (let sideComparator = 0; sideComparator < this.amountOfSides; sideComparator++) {
+        if (anchorComparator !== sideComparator) {
+          return false
+        }
+      }
+    }
     return true
   }
 
