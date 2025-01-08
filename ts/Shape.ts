@@ -128,9 +128,10 @@ export class Shape {
    * @return is the shape is regular
    */
   public isRegular (): boolean {
+    // check if all the side lengths are equal
     for (let anchorComparator = 0; anchorComparator < this.amountOfSides; anchorComparator++) {
       for (let sideComparator = 0; sideComparator < this.amountOfSides; sideComparator++) {
-        if (anchorComparator !== sideComparator) {
+        if (this.sideLengths[anchorComparator] !== this.sideLengths[sideComparator]) {
           return false
         }
       }
@@ -152,5 +153,42 @@ export class Shape {
       // } else {
       return true
     }
+  }
+
+  /**
+   * Finds the semiperimeters of every smaller triangle in the shape.
+   *
+   * @return a numerical array of all of the semiperimeters
+   */
+  protected semiPerimeters (): number[] {
+    const oneLessDiagonal = this.amountOfDiagonals - 1
+    let numberOfTriangles: number
+    const semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
+    for (numberOfTriangles = 0; numberOfTriangles < this.amountOfDiagonals; numberOfTriangles++) {
+      const previousDiagonal = numberOfTriangles - 1
+      const nextSide = numberOfTriangles + 1
+      if (previousDiagonal < 0) {
+        // the semiperimeter of the first triangle of that shape
+        semiperimeters[numberOfTriangles] =
+          (this.sideLengths[numberOfTriangles] + this.sideLengths[nextSide] +
+           this.diagonalLengths[numberOfTriangles]) / 2
+      } else {
+        // the semiperimeter of any other triangle within the shape except for the last one
+        semiperimeters[numberOfTriangles] =
+          (this.diagonalLengths[previousDiagonal] + this.diagonalLengths[numberOfTriangles] +
+           this.sideLengths[nextSide]) / 2
+      }
+    }
+    if (oneLessDiagonal < 0) {
+      // The shape is a triangle so this only has one semiperimeter
+      semiperimeters[numberOfTriangles] =
+        (this.sideLengths[0] + this.sideLengths[1] + this.sideLengths[2]) / 2
+    } else {
+      // the last semiperimeter of the shape
+      semiperimeters[numberOfTriangles] =
+        (this.diagonalLengths[numberOfTriangles - 1] + this.sideLengths[this.amountOfSides - 1] +
+         this.sideLengths[this.amountOfSides - 2]) / 2
+    }
+    return semiperimeters
   }
 }
