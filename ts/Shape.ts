@@ -163,6 +163,7 @@ export class Shape {
   protected semiPerimeters (): number[] {
     const oneLessDiagonal = this.amountOfDiagonals - 1
     let numberOfTriangles: number
+    // fill the array with 0's for now
     const semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
     for (numberOfTriangles = 0; numberOfTriangles < this.amountOfDiagonals; numberOfTriangles++) {
       const previousDiagonal = numberOfTriangles - 1
