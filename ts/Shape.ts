@@ -164,7 +164,7 @@ export class Shape {
     const oneLessDiagonal = this.amountOfDiagonals - 1
     let numberOfTriangles: number
     // fill the array with 0's for now
-    const semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
+    let semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
     for (numberOfTriangles = 0; numberOfTriangles < this.amountOfDiagonals; numberOfTriangles++) {
       const previousDiagonal = numberOfTriangles - 1
       const nextSide = numberOfTriangles + 1
@@ -191,5 +191,160 @@ export class Shape {
          this.sideLengths[this.amountOfSides - 2]) / 2
     }
     return semiperimeters
+  }
+
+  /**
+   * This method finds all of the angles in the shape.
+   *
+   * @param {number} indexOfAngle
+   * @return angle in the spot of the index
+   */
+  public angle (indexOfAngle: number): number {
+    if (this.angles[0] === 0) {
+      // If the angle method has already been called, don't run the entire thing again.
+      let solvingSide: number = 0 // the side that is paired with the angle being solved
+      let givenSideA: number = 0 // a side to help solve the angle
+      let givenSideB: number = 0 // another side to help solve the angle
+      if (this.getName() === 'Triangle') {
+        // Exception for triangle since it has no diagonals
+        for (let angleNumber = 0; angleNumber < this.amountOfSides; angleNumber++) {
+          if (angleNumber === 0) {
+            // This solves for angle 0
+            solvingSide = this.sideLengths[1]
+            givenSideA = this.sideLengths[0]
+            givenSideB = this.sideLengths[2]
+          } else if (angleNumber === 1) {
+            // This solves for angle 1
+            solvingSide = this.sideLengths[2]
+            givenSideA = this.sideLengths[1]
+            givenSideB = this.sideLengths[0]
+          } else if (angleNumber === 2) {
+            // This solves for angle 2
+            solvingSide = this.sideLengths[0]
+            givenSideA = this.sideLengths[2]
+            givenSideB = this.sideLengths[1]
+          }
+          // use cosine law
+            this.angles[angleNumber] = Math.acos(
+              (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
+              (2 * givenSideA * givenSideB)
+            )
+        }
+      }
+
+      // This is what the rest of the shapes use to find the angles
+      let innerTriangleAngles: number[][] =
+      // The first inner triangle is different from the rest of the inner triangles
+      for (let angleNumber = 0; angleNumber < this.amountOfSides; angleNumber++) {
+        if (angleNumber === 0) {
+          // This solves for a piece of the top angle
+          solvingSide = this.sideLengths[1]
+          givenSideA = this.sideLengths[0]
+          givenSideB = this.diagonalLengths[0]
+        } else if (angleNumber === 1) {
+          // This solves for the left angle of the inner triangle
+          solvingSide = this.diagonalLengths[0]
+          givenSideA = this.sideLengths[1]
+          givenSideB = this.sideLengths[0]
+        } else if (angleNumber === 2) {
+          // This solves for right angle of the inner triangle
+          solvingSide = this.sideLengths[0]
+          givenSideA = this.diagonalLengths[0]
+          givenSideB = this.sideLengths[1]
+        }
+        // use cosine law
+          innerTriangleAngles[0].push(Math.acos(
+            (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
+            (2 * givenSideA * givenSideB))
+          )
+      }
+
+      for (let angleNumber = 1; angleNumber < this.amountOfSides; angleNumber++) {
+        if (angleNumber === 0) {
+          // This solves for a piece of the top angle
+          solvingSide = this.sideLengths[1]
+          givenSideA = this.sideLengths[0]
+          givenSideB = this.sideLengths[2]
+        } else if (angleNumber === 1) {
+          // This solves for the left angle of the inner triangle
+          solvingSide = this.sideLengths[2]
+          givenSideA = this.sideLengths[1]
+          givenSideB = this.sideLengths[0]
+        } else if (angleNumber === 2) {
+          // This solves for right angle of the inner triangle
+          solvingSide = this.sideLengths[0]
+          givenSideA = this.sideLengths[2]
+          givenSideB = this.sideLengths[1]
+        }
+        // use cosine law
+          this.angles[angleNumber] = Math.acos(
+            (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
+            (2 * givenSideA * givenSideB)
+          )
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+      let solvingSide = 0
+      let givenSideA = 0
+      let givenSideB = 0
+      // this switch case is not the most efficient way of solving the problem but it works
+      // and would take to long attempting something else
+      switch (this.amountOfSides) {
+        case 3:
+          for (let counter = 0; counter < this.amountOfSides; counter++) {
+            if (counter === 0) {
+              // This solves for angle 0
+              solvingSide = this.sideA
+              givenSideA = this.sideB
+              givenSideB = this.sideC
+            } else if (counter === 1) {
+              // This solves for angle 1
+              solvingSide = this.sideB
+              givenSideA = this.sideC
+              givenSideB = this.sideA
+            } else if (counter === 2) {
+              // This solves for angle 2
+              solvingSide = this.sideC
+              givenSideA = this.sideA
+              givenSideB = this.sideB
+            }
+        }
+          break
+        case 4:
+          this.name = 'Rectangle'
+          break
+        case 5:
+          this.name = 'Pentagon'
+          break
+        case 6:
+          this.name = 'Hexagon'
+          break
+        case 7:
+          this.name = 'Heptagon'
+          break
+        case 8:
+          this.name = 'Octogon'
+          break
+        case 9:
+          this.name = 'Nonagon'
+          break
+        case 10:
+          this.name = 'Decagon'
+          break
+        default:
+          this.name = 'inValid'
+          break
+      }
+      return this.angles[indexOfAngle]
+    }
   }
 }
