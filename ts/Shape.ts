@@ -104,9 +104,13 @@ export class Shape {
    * @return length of side
    */
   public getSideLength (sideNumber: number): number {
-    if (sideNumber <= this.amountOfSides && sideNumber > 0) {
-      sideNumber--
-      return this.sideLengths[sideNumber]
+    if(this.isValid()) {
+      if (sideNumber <= this.amountOfSides && sideNumber > 0) {
+        sideNumber--
+        return this.sideLengths[sideNumber]
+      } else {
+        return -1
+      }
     } else {
       return -1
     }
@@ -118,8 +122,12 @@ export class Shape {
    * @return {number} of perimeter
    */
   public perimeter (): number {
-    // find the sum of all of the lengths in the array
-    return this.sideLengths.reduce((a, b) => a + b)
+    if (this.isValid()) {
+      // find the sum of all of the lengths in the array
+      return this.sideLengths.reduce((a, b) => a + b)
+    } else {
+      return -1
+    }
   }
 
   /**
@@ -128,15 +136,33 @@ export class Shape {
    * @return is the shape is regular
    */
   public isRegular (): boolean {
-    // check if all the side lengths are equal
-    for (let anchorComparator = 0; anchorComparator < this.amountOfSides; anchorComparator++) {
-      for (let sideComparator = 0; sideComparator < this.amountOfSides; sideComparator++) {
-        if (this.sideLengths[anchorComparator] !== this.sideLengths[sideComparator]) {
-          return false
+    if(this.isValid()) {
+      // check if all the side lengths are equal
+      for (let anchorComparator = 0; anchorComparator < this.amountOfSides; anchorComparator++) {
+        for (let sideComparator = 0; sideComparator < this.amountOfSides; sideComparator++) {
+          if (this.sideLengths[anchorComparator] !== this.sideLengths[sideComparator]) {
+            return false
+          }
         }
       }
+      return true
+    } else {
+    return false
     }
-    return true
+  }
+
+  /**
+   * This method finds the area of the shape.
+   *
+   * @return {number} of area
+   */
+  private sumOfAngles (): number {
+    if (this.angles[0] === 0) {
+      // Run the angle function not to find a single angle, but to fill the angles array.
+      const unusedVariable = this.angle(0)
+    }
+    // find the sum of all of the angles in the array
+    return this.angles.reduce((a, b) => a + b)
   }
 
   /**
@@ -148,10 +174,11 @@ export class Shape {
     if (this.name === 'inValid') {
       return false
     } else {
-      // if (sumOfAngles() !== (this.numberOfSides -2) * 180) {
-      // return false
-      // } else {
+      if (this.sumOfAngles() !== (this.amountOfSides - 2) * 180) {
+        return false
+      } else {
       return true
+      }
     }
   }
 
@@ -161,36 +188,40 @@ export class Shape {
    * @return a numerical array of all of the semiperimeters
    */
   protected semiPerimeters (): number[] {
-    const oneLessDiagonal = this.amountOfDiagonals - 1
-    let numberOfTriangles: number
-    // fill the array with 0's for now
-    let semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
-    for (numberOfTriangles = 0; numberOfTriangles < this.amountOfDiagonals; numberOfTriangles++) {
-      const previousDiagonal = numberOfTriangles - 1
-      const nextSide = numberOfTriangles + 1
-      if (previousDiagonal < 0) {
-        // the semiperimeter of the first triangle of that shape
-        semiperimeters[numberOfTriangles] =
-          (this.sideLengths[numberOfTriangles] + this.sideLengths[nextSide] +
-           this.diagonalLengths[numberOfTriangles]) / 2
-      } else {
-        // the semiperimeter of any other triangle within the shape except for the last one
-        semiperimeters[numberOfTriangles] =
-          (this.diagonalLengths[previousDiagonal] + this.diagonalLengths[numberOfTriangles] +
-           this.sideLengths[nextSide]) / 2
+    if (this.isValid()) {
+      const oneLessDiagonal = this.amountOfDiagonals - 1
+      let numberOfTriangles: number
+      // fill the array with 0's for now
+      let semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
+      for (numberOfTriangles = 0; numberOfTriangles < this.amountOfDiagonals; numberOfTriangles++) {
+        const previousDiagonal = numberOfTriangles - 1
+        const nextSide = numberOfTriangles + 1
+        if (previousDiagonal < 0) {
+          // the semiperimeter of the first triangle of that shape
+          semiperimeters[numberOfTriangles] =
+            (this.sideLengths[numberOfTriangles] + this.sideLengths[nextSide] +
+            this.diagonalLengths[numberOfTriangles]) / 2
+        } else {
+          // the semiperimeter of any other triangle within the shape except for the last one
+          semiperimeters[numberOfTriangles] =
+            (this.diagonalLengths[previousDiagonal] + this.diagonalLengths[numberOfTriangles] +
+            this.sideLengths[nextSide]) / 2
+        }
       }
-    }
-    if (oneLessDiagonal < 0) {
-      // The shape is a triangle so this only has one semiperimeter
-      semiperimeters[numberOfTriangles] =
-        (this.sideLengths[0] + this.sideLengths[1] + this.sideLengths[2]) / 2
+      if (oneLessDiagonal < 0) {
+        // The shape is a triangle so this only has one semiperimeter
+        semiperimeters[numberOfTriangles] =
+          (this.sideLengths[0] + this.sideLengths[1] + this.sideLengths[2]) / 2
+      } else {
+        // the last semiperimeter of the shape
+        semiperimeters[numberOfTriangles] =
+          (this.diagonalLengths[numberOfTriangles - 1] + this.sideLengths[this.amountOfSides - 1] +
+          this.sideLengths[this.amountOfSides - 2]) / 2
+      }
+      return semiperimeters
     } else {
-      // the last semiperimeter of the shape
-      semiperimeters[numberOfTriangles] =
-        (this.diagonalLengths[numberOfTriangles - 1] + this.sideLengths[this.amountOfSides - 1] +
-         this.sideLengths[this.amountOfSides - 2]) / 2
+      return []
     }
-    return semiperimeters
   }
 
   /**
@@ -205,7 +236,7 @@ export class Shape {
       let solvingSide: number = 0 // the side that is paired with the angle being solved
       let givenSideA: number = 0 // a side to help solve the angle
       let givenSideB: number = 0 // another side to help solve the angle
-      if (this.getName() === 'Triangle') {
+      if (this.sideLengths.length === 3) {
         // Exception for triangle since it has no diagonals
         for (let angleNumber = 0; angleNumber < this.amountOfSides; angleNumber++) {
           if (angleNumber === 0) {
@@ -234,6 +265,7 @@ export class Shape {
         // This is what the rest of the shapes use to find the angles
         const numberOfTriangles = this.amountOfDiagonals + 1
         let innerTriangleAngles: number[][] = Array.from({ length: numberOfTriangles }, () => [])
+        const oneLessTriangle = numberOfTriangles - 1
         // The first inner triangle is different from the rest of the inner triangles
         for (let angleNumber = 0; angleNumber < this.amountOfSides; angleNumber++) {
           if (angleNumber === 0) {
@@ -259,7 +291,7 @@ export class Shape {
           )
         }
         // This loop is for the rest of the inner triangles
-        for (let triangleNumber = 1; triangleNumber < numberOfTriangles; triangleNumber++) {
+        for (let triangleNumber = 1; triangleNumber < oneLessTriangle; triangleNumber++) {
           for (let angleNumber = 0; angleNumber < this.amountOfSides; angleNumber++) {
             if (angleNumber === 0) {
               // This solves for a piece of the top angle
@@ -303,10 +335,25 @@ export class Shape {
             givenSideB = this.sideLengths[this.amountOfSides - 2]
           }
           // use cosine law
-          innerTriangleAngles[numberOfTriangles].push(Math.acos(
+          innerTriangleAngles[oneLessTriangle].push(Math.acos(
             (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
             (2 * givenSideA * givenSideB))
           )
+        }
+        // This is for adding all of the smaller angles that form the top angle.
+        for (let counter = 0; counter < numberOfTriangles; counter++) {
+          this.angles[0] = this.angles[0] + innerTriangleAngles[counter][0]
+        }
+        // This is for the angle right after the top angle which has no diagonals.
+        this.angles[1] = innerTriangleAngles[0][1]
+        // This is for the angles containing a diagonal.
+        // This is a makeshift for loop to add counter mid loop instead of at the end.
+        let counter = 0
+        while (counter < oneLessTriangle) {
+          const counterPlusTwo = counter + 2
+          this.angles[counterPlusTwo] = innerTriangleAngles[counter][2]
+          counter++
+          this.angles[counterPlusTwo] = innerTriangleAngles[counter][1]
         }
       }
     }
