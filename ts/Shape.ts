@@ -141,7 +141,10 @@ export class Shape {
 
   private sumOfAngles (): number {
     if (this.angles[0] === 0) {
-      angle()
+      // Run the angle function not to find a single angle, but to fill the angles array.
+      let unusedVariable = this.angle(0)
+    }
+    // find the sum of all of the angles in the array
     return this.angles.reduce((a, b) => a + b)
   }
 
@@ -154,10 +157,11 @@ export class Shape {
     if (this.name === 'inValid') {
       return false
     } else {
-      if (sumOfAngles() !== (this.numberOfSides -2) * 180) {
+      if (this.sumOfAngles() !== (this.amountOfSides - 2) * 180) {
         return false
       } else {
       return true
+      }
     }
   }
 
@@ -316,7 +320,7 @@ export class Shape {
           )
         }
         // This is for adding all of the smaller angles that form the top angle.
-        for (let counter = 0; counter < numberOfTriangles;) {
+        for (let counter = 0; counter < numberOfTriangles; counter++) {
           this.angles[0] = this.angles[0] + innerTriangleAngles[counter][0]
         }
         // This is for the angle right after the top angle which has no diagonals.
@@ -324,7 +328,7 @@ export class Shape {
         // This is for the angles containing a diagonal.
         // This is a makeshift for loop to add counter mid loop instead of at the end.
         let counter = 0
-        while (counter < numberOfTriangles) {
+        while (counter < oneLessTriangle) {
           const counterPlusTwo = counter + 2
           this.angles[counterPlusTwo] = innerTriangleAngles[counter][2]
           counter++
