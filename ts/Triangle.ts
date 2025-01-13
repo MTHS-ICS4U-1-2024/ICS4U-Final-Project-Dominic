@@ -6,26 +6,20 @@
  * since 2024-11-08
  */
 
-export class Triangle {
+import { Shape } from './Shape'
+
+export class Triangle extends Shape {
   /**
-   * The first side length of the triange.
+   * The constructor for the Triangle class.
+   *
+   * @param {number} sideA
+   * @param {number} sideB
+   * @param {number} sideC
    */
-  private readonly sideA: number
-
-  /**
-   *  The second side length of the triange.
-  */
-  private readonly sideB: number
-
-  /**
-   * The third side length of the triange.
-   */
-  private readonly sideC: number
-
   constructor (sideA: number, sideB: number, sideC: number) {
-    this.sideA = sideA
-    this.sideB = sideB
-    this.sideC = sideC
+    const sides: number[] = [sideA, sideB, sideC]
+    const diagonals: number[] = [] // no diagonals
+    super(sides, diagonals)
   }
 
   /**
@@ -71,38 +65,6 @@ export class Triangle {
   }
 
   /**
-   * The semi-periemter method
-   *
-   * @return {number} of semi-perimeter
-   */
-  public semiPerimeter (): number {
-    let semiPerimeterOfTriangle: number
-    if (this.isValid()) {
-      semiPerimeterOfTriangle = this.perimeter() / 2
-    } else {
-      semiPerimeterOfTriangle = -1
-    }
-    return semiPerimeterOfTriangle
-  }
-
-  /**
-   * Checks if the user inputs make a valid triangle.
-   *
-   * @return {boolean} if the the triangle is real
-   */
-  public isValid (): boolean {
-    let returnValue: boolean = false
-    if ((this.sideA + this.sideB) > this.sideC) {
-      if ((this.sideA + this.sideC) > this.sideB) {
-        if ((this.sideB + this.sideC) > this.sideA) {
-          returnValue = true
-        }
-      }
-    }
-    return returnValue
-  }
-
-  /**
    * The area method.
    *
    * @return {number} of area
@@ -110,11 +72,12 @@ export class Triangle {
   public area (): number {
     let areaOfTriangle: number
     if (this.isValid()) {
+      const arrayOfSemiperimeters: number[] = this.semiPerimeters()
       areaOfTriangle = Math.sqrt(
-        this.semiPerimeter() *
-        (this.semiPerimeter() - this.sideA) *
-        (this.semiPerimeter() - this.sideB) *
-        (this.semiPerimeter() - this.sideC)
+        arrayOfSemiperimeters[0] *
+        (arrayOfSemiperimeters[0] - this.sideLengths[0]) *
+        (arrayOfSemiperimeters[0] - this.sideLengths[1]) *
+        (arrayOfSemiperimeters[0] - this.sideLengths[2])
       )
     } else {
       areaOfTriangle = -1
@@ -123,64 +86,18 @@ export class Triangle {
   }
 
   /**
-   * This method finds an angle of the triangle.
-   *
-   * @param {number} angleNumber to solve for
-   * @return {number} the corresponding angle
-   */
-  public angle (angleNumber: number): number {
-    let solvedAngle: number
-    if (this.isValid()) {
-      let validAngle: boolean = true
-      let solvingSide: number = 0 // the side that is paired with the angle being solved
-      let givenSideA: number = 0 // a side to help solve the angle
-      let givenSideB: number = 0 // another side to help solve the angle
-      if (angleNumber === 1) {
-        solvingSide = this.sideA
-        givenSideA = this.sideB
-        givenSideB = this.sideC
-      } else if (angleNumber === 2) {
-        solvingSide = this.sideB
-        givenSideA = this.sideC
-        givenSideB = this.sideA
-      } else if (angleNumber === 3) {
-        solvingSide = this.sideC
-        givenSideA = this.sideA
-        givenSideB = this.sideB
-      } else {
-        validAngle = false
-      }
-      if (validAngle) {
-        // use cosine law
-        solvedAngle = Math.acos(
-          (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
-          (2 * givenSideA * givenSideB)
-        )
-      } else {
-        solvedAngle = -1
-      }
-    } else {
-      solvedAngle = -1
-    }
-    return solvedAngle
-  }
-
-  /**
    * This method finds the type of triangle.
    *
    * @return {string} of triangle type
    */
-  public getType (): string {
+  public type (): string {
     let type: string
     if (this.isValid()) {
-      const angleA: number = this.angle(1)
-      const angleB: number = this.angle(2)
-      const angleC: number = this.angle(3)
-      if (angleA === Math.acos(0) || angleB === Math.acos(0) || angleC === Math.acos(0)) {
-        type = 'Right Angle Triangle'
-      } else if (angleB === angleC && angleA === angleB) {
+      if (this.isRegular()) {
         type = 'Equilateral Triangle'
-      } else if (angleA === angleB || angleB === angleC || angleA === angleC) {
+      } else if (this.angles[0] === Math.acos(0) || this.angles[1] === Math.acos(0) || this.angles[2] === Math.acos(0)) {
+        type = 'Right Angle Triangle'
+      } else if (this.angles[0] === this.angles[1] || this.angles[0] === this.angles[2] || this.angles[1] === this.angles[2]) {
         type = 'Isosceles Triangle'
       } else {
         type = 'Scalene triangle'
