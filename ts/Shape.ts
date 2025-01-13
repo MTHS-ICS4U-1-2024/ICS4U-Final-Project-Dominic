@@ -139,6 +139,12 @@ export class Shape {
     return true
   }
 
+  private sumOfAngles (): number {
+    if (this.angles[0] === 0) {
+      angle()
+    return this.angles.reduce((a, b) => a + b)
+  }
+
   /**
    * Check if the user inputs make a valid shape.
    *
@@ -148,9 +154,9 @@ export class Shape {
     if (this.name === 'inValid') {
       return false
     } else {
-      // if (sumOfAngles() !== (this.numberOfSides -2) * 180) {
-      // return false
-      // } else {
+      if (sumOfAngles() !== (this.numberOfSides -2) * 180) {
+        return false
+      } else {
       return true
     }
   }
@@ -234,6 +240,7 @@ export class Shape {
         // This is what the rest of the shapes use to find the angles
         const numberOfTriangles = this.amountOfDiagonals + 1
         let innerTriangleAngles: number[][] = Array.from({ length: numberOfTriangles }, () => [])
+        const oneLessTriangle = numberOfTriangles - 1
         // The first inner triangle is different from the rest of the inner triangles
         for (let angleNumber = 0; angleNumber < this.amountOfSides; angleNumber++) {
           if (angleNumber === 0) {
@@ -259,7 +266,7 @@ export class Shape {
           )
         }
         // This loop is for the rest of the inner triangles
-        for (let triangleNumber = 1; triangleNumber < numberOfTriangles; triangleNumber++) {
+        for (let triangleNumber = 1; triangleNumber < oneLessTriangle; triangleNumber++) {
           for (let angleNumber = 0; angleNumber < this.amountOfSides; angleNumber++) {
             if (angleNumber === 0) {
               // This solves for a piece of the top angle
@@ -303,10 +310,25 @@ export class Shape {
             givenSideB = this.sideLengths[this.amountOfSides - 2]
           }
           // use cosine law
-          innerTriangleAngles[numberOfTriangles].push(Math.acos(
+          innerTriangleAngles[oneLessTriangle].push(Math.acos(
             (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
             (2 * givenSideA * givenSideB))
           )
+        }
+        // This is for adding all of the smaller angles that form the top angle.
+        for (let counter = 0; counter < numberOfTriangles;) {
+          this.angles[0] = this.angles[0] + innerTriangleAngles[counter][0]
+        }
+        // This is for the angle right after the top angle which has no diagonals.
+        this.angles[1] = innerTriangleAngles[0][1]
+        // This is for the angles containing a diagonal.
+        // This is a makeshift for loop to add counter mid loop instead of at the end.
+        let counter = 0
+        while (counter < numberOfTriangles) {
+          const counterPlusTwo = counter + 2
+          this.angles[counterPlusTwo] = innerTriangleAngles[counter][2]
+          counter++
+          this.angles[counterPlusTwo] = innerTriangleAngles[counter][1]
         }
       }
     }
