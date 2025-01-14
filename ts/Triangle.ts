@@ -1,9 +1,9 @@
 /**
- * The Vehicle Class
+ * The Triangle Class
  *
  * author Dominic M.
  * version 1.0
- * since 2024-11-08
+ * since 2025-01-11
  */
 
 import { Shape } from './Shape'
@@ -12,9 +12,8 @@ export class Triangle extends Shape {
   /**
    * The constructor for the Triangle class.
    *
-   * @param {number} sideA
-   * @param {number} sideB
-   * @param {number} sideC
+   * @param {number[]} sides
+   * @param {number[]} diagonals
    */
   constructor (sides: number[], diagonals: number[]) {
     super(sides, diagonals)

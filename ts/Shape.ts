@@ -3,7 +3,7 @@
  *
  * author  Dominic M.
  * version 1.0
- * since   2024-01-07
+ * since   2025-01-07
  */
 
 export class Shape {

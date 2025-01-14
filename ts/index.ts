@@ -7,7 +7,6 @@
  */
 
 import { createPrompt } from 'bun-promptx'
-import { Shape } from './Shape'
 import { Triangle } from './Triangle'
 
 console.log('This program calculates the dimentions of a shapes with 3-10 sides.')
