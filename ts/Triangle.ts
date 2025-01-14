@@ -1,9 +1,9 @@
 /**
- * The Vehicle Class
+ * The Triangle Class
  *
  * author Dominic M.
  * version 1.0
- * since 2024-11-08
+ * since 2025-01-11
  */
 
 import { Shape } from './Shape'
@@ -12,56 +12,11 @@ export class Triangle extends Shape {
   /**
    * The constructor for the Triangle class.
    *
-   * @param {number} sideA
-   * @param {number} sideB
-   * @param {number} sideC
+   * @param {number[]} sides
+   * @param {number[]} diagonals
    */
-  constructor (sideA: number, sideB: number, sideC: number) {
-    const sides: number[] = [sideA, sideB, sideC]
-    const diagonals: number[] = [] // no diagonals
+  constructor (sides: number[], diagonals: number[]) {
     super(sides, diagonals)
-  }
-
-  /**
-   * Getter for the first side.
-   *
-   * @return {number} of side length A
-   */
-  public get sideLengthA (): number {
-    return this.sideA
-  }
-
-  /**
-   * Getter for the second side.
-   *
-   * @return {number} of side length B
-   */
-  public get sideLengthB (): number {
-    return this.sideB
-  }
-
-  /**
-   * Getter for the second side.
-   *
-   * @return {number} of side length C
-   */
-  public get sideLengthC (): number {
-    return this.sideC
-  }
-
-  /**
-   * The perimeter method.
-   *
-   * @return {number} of perimeter
-   */
-  private perimeter (): number {
-    let perimeterOfTriangle: number
-    if (this.isValid()) {
-      perimeterOfTriangle = this.sideA + this.sideB + this.sideC
-    } else {
-      perimeterOfTriangle = -1
-    }
-    return perimeterOfTriangle
   }
 
   /**
@@ -72,12 +27,12 @@ export class Triangle extends Shape {
   public area (): number {
     let areaOfTriangle: number
     if (this.isValid()) {
-      const arrayOfSemiperimeters: number[] = this.semiPerimeters()
+      const arrayOfSemiperimeters: number = this.semiPerimeters()[0]
       areaOfTriangle = Math.sqrt(
-        arrayOfSemiperimeters[0] *
-        (arrayOfSemiperimeters[0] - this.sideLengths[0]) *
-        (arrayOfSemiperimeters[0] - this.sideLengths[1]) *
-        (arrayOfSemiperimeters[0] - this.sideLengths[2])
+        arrayOfSemiperimeters *
+        (arrayOfSemiperimeters - this.sideLengths[0]) *
+        (arrayOfSemiperimeters - this.sideLengths[1]) *
+        (arrayOfSemiperimeters - this.sideLengths[2])
       )
     } else {
       areaOfTriangle = -1
@@ -120,11 +75,11 @@ export class Triangle extends Shape {
       let validSide: boolean = true
       let base: number = 0
       if (sideNumber === 1) {
-        base = this.sideA
+        base = this.sideLengths[0]
       } else if (sideNumber === 2) {
-        base = this.sideB
+        base = this.sideLengths[1]
       } else if (sideNumber === 3) {
-        base = this.sideC
+        base = this.sideLengths[2]
       } else {
         validSide = false
       }
@@ -147,7 +102,7 @@ export class Triangle extends Shape {
   public innerCircleRadius (): number {
     let innerRadius: number
     if (this.isValid()) {
-      innerRadius = this.area() / this.semiPerimeter()
+      innerRadius = this.area() / this.semiPerimeters()[0]
     } else {
       innerRadius = -1
     }
@@ -162,7 +117,7 @@ export class Triangle extends Shape {
   public circumcircleRadius (): number {
     let outerRadius: number
     if (this.isValid()) {
-      outerRadius = (this.sideA * this.sideB * this.sideC) / (4 * this.area())
+      outerRadius = (this.sideLengths[0] * this.sideLengths[1] * this.sideLengths[2]) / (4 * this.area())
     } else {
       outerRadius = -1
     }
