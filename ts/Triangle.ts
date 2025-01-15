@@ -74,11 +74,11 @@ export class Triangle extends Shape {
     if (this.isValid()) {
       let validSide: boolean = true
       let base: number = 0
-      if (sideNumber === 1) {
+      if (sideNumber === 0) {
         base = this.sideLengths[0]
-      } else if (sideNumber === 2) {
+      } else if (sideNumber === 1) {
         base = this.sideLengths[1]
-      } else if (sideNumber === 3) {
+      } else if (sideNumber === 2) {
         base = this.sideLengths[2]
       } else {
         validSide = false

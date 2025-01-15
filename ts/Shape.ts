@@ -67,7 +67,7 @@ export class Shape {
           this.name = 'Heptagon'
           break
         case 8:
-          this.name = 'Octogon'
+          this.name = 'Octagon'
           break
         case 9:
           this.name = 'Nonagon'
