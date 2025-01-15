@@ -152,7 +152,7 @@ export class Shape {
   }
 
   /**
-   * This method finds the area of the shape.
+   * This method finds the sum of the angles of the shape.
    *
    * @return {number} of area
    */
@@ -260,6 +260,8 @@ export class Shape {
               (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
               (2 * givenSideA * givenSideB)
             )
+          // convert the angle from radians to degrees
+          this.angles[angleNumber] = this.angles[angleNumber] * (180 / Math.PI)
         }
       } else {
         // This is what the rest of the shapes use to find the angles
@@ -289,6 +291,8 @@ export class Shape {
             (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
             (2 * givenSideA * givenSideB))
           )
+          // convert the angle from radians to degrees
+          innerTriangleAngles[0][angleNumber] = innerTriangleAngles[0][angleNumber] * (180 / Math.PI)
         }
         // This loop is for the rest of the inner triangles
         for (let triangleNumber = 1; triangleNumber < oneLessTriangle; triangleNumber++) {
@@ -314,6 +318,8 @@ export class Shape {
               (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
               (2 * givenSideA * givenSideB))
             )
+            // convert the angle from radians to degrees
+            innerTriangleAngles[0][angleNumber] = innerTriangleAngles[0][angleNumber] * (180 / Math.PI)
           }
         }
         // This loop is for the last triangle
@@ -339,6 +345,8 @@ export class Shape {
             (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
             (2 * givenSideA * givenSideB))
           )
+          // convert the angle from radians to degrees
+          innerTriangleAngles[0][angleNumber] = innerTriangleAngles[0][angleNumber] * (180 / Math.PI)
         }
         // This is for adding all of the smaller angles that form the top angle.
         for (let counter = 0; counter < numberOfTriangles; counter++) {
