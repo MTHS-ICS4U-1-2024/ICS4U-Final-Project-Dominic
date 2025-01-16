@@ -148,7 +148,7 @@ switch (sideCounter) {
               } else if (angle < 0 || angle > 2) {
                 throw new Error('Invalid number');
               } else {
-                console.log('\nThe side length is ' + triangle.getSideLength(angle))
+                console.log('\nThe angle is ' + triangle.angle(angle))
               }
             } else {
               throw new Error('Invalid number');
