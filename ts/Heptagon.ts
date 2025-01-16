@@ -10,18 +10,8 @@ import { Shape } from './Shape'
 
 export class Heptagon extends Shape {
   /**
-   * The constructor for the Heptagon class.
-   * 
-   * @param {number[]} sides
-   * @param {number[]} diagonals
-   */
-  constructor (sides: number[], diagonals: number[]) {
-    super(sides, diagonals)
-  }
-
-  /**
    * The area method.
-   * 
+   *
    * @return {number} of area
    */
   public area (): number {

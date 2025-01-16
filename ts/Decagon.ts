@@ -10,18 +10,8 @@ import { Shape } from './Shape'
 
 export class Decagon extends Shape {
   /**
-   * The constructor for the Decagon class.
-   * 
-   * @param {number[]} sides
-   * @param {number[]} diagonals
-   */
-  constructor (sides: number[], diagonals: number[]) {
-    super(sides, diagonals)
-  }
-
-  /**
    * The area method.
-   * 
+   *
    * @return {number} of area
    */
   public area (): number {

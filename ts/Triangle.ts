@@ -10,16 +10,6 @@ import { Shape } from './Shape'
 
 export class Triangle extends Shape {
   /**
-   * The constructor for the Triangle class.
-   *
-   * @param {number[]} sides
-   * @param {number[]} diagonals
-   */
-  constructor (sides: number[], diagonals: number[]) {
-    super(sides, diagonals)
-  }
-
-  /**
    * The area method.
    *
    * @return {number} of area
@@ -70,16 +60,13 @@ export class Triangle extends Shape {
    * @return {number} of height to the corresponding side
    */
   public height (sideNumber: number): number {
+    sideNumber--
     let heightOfTriangle: number
     if (this.isValid()) {
       let validSide: boolean = true
       let base: number = 0
-      if (sideNumber === 0) {
-        base = this.sideLengths[0]
-      } else if (sideNumber === 1) {
-        base = this.sideLengths[1]
-      } else if (sideNumber === 2) {
-        base = this.sideLengths[2]
+      if (sideNumber >= 0 && sideNumber < 3) {
+        base = this.sideLengths[sideNumber]
       } else {
         validSide = false
       }
