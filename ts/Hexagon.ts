@@ -10,18 +10,8 @@ import { Shape } from './Shape'
 
 export class Hexagon extends Shape {
   /**
-   * The constructor for the Hexagon class.
-   * 
-   * @param {number[]} sides
-   * @param {number[]} diagonals
-   */
-  constructor (sides: number[], diagonals: number[]) {
-    super(sides, diagonals)
-  }
-
-  /**
    * The area method.
-   * 
+   *
    * @return {number} of area
    */
   public area (): number {
@@ -47,6 +37,7 @@ export class Hexagon extends Shape {
         (this.semiPerimeters()[3] - this.sideLengths[4]) *
         (this.semiPerimeters()[3] - this.sideLengths[5])
       )
+      areaOfHexagon = Math.round(areaOfHexagon * 100) / 100
     } else {
       areaOfHexagon = -1
     }

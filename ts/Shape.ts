@@ -55,7 +55,7 @@ export class Shape {
           this.name = 'Triangle'
           break
         case 4:
-          this.name = 'Rectangle'
+          this.name = 'Quadrilateral'
           break
         case 5:
           this.name = 'Pentagon'
@@ -67,7 +67,7 @@ export class Shape {
           this.name = 'Heptagon'
           break
         case 8:
-          this.name = 'Octogon'
+          this.name = 'Octagon'
           break
         case 9:
           this.name = 'Nonagon'
@@ -104,7 +104,7 @@ export class Shape {
    * @return length of side
    */
   public getSideLength (sideNumber: number): number {
-    if(this.isValid()) {
+    if (this.isValid()) {
       if (sideNumber <= this.amountOfSides && sideNumber > 0) {
         sideNumber--
         return this.sideLengths[sideNumber]
@@ -136,7 +136,7 @@ export class Shape {
    * @return is the shape is regular
    */
   public isRegular (): boolean {
-    if(this.isValid()) {
+    if (this.isValid()) {
       // check if all the side lengths are equal
       for (let anchorComparator = 0; anchorComparator < this.amountOfSides; anchorComparator++) {
         for (let sideComparator = 0; sideComparator < this.amountOfSides; sideComparator++) {
@@ -147,19 +147,19 @@ export class Shape {
       }
       return true
     } else {
-    return false
+      return false
     }
   }
 
   /**
-   * This method finds the area of the shape.
+   * This method finds the sum of the angles of the shape.
    *
    * @return {number} of area
    */
   private sumOfAngles (): number {
     if (this.angles[0] === 0) {
       // Run the angle function not to find a single angle, but to fill the angles array.
-      const unusedVariable = this.angle(0)
+      this.angle(0)
     }
     // find the sum of all of the angles in the array
     return this.angles.reduce((a, b) => a + b)
@@ -177,7 +177,7 @@ export class Shape {
       if (this.sumOfAngles() !== (this.amountOfSides - 2) * 180) {
         return false
       } else {
-      return true
+        return true
       }
     }
   }
@@ -192,7 +192,7 @@ export class Shape {
       const oneLessDiagonal = this.amountOfDiagonals - 1
       let numberOfTriangles: number
       // fill the array with 0's for now
-      let semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
+      const semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
       for (numberOfTriangles = 0; numberOfTriangles < this.amountOfDiagonals; numberOfTriangles++) {
         const previousDiagonal = numberOfTriangles - 1
         const nextSide = numberOfTriangles + 1
@@ -231,8 +231,9 @@ export class Shape {
    * @return angle in the spot of the index
    */
   public angle (indexOfAngle: number): number {
+    indexOfAngle--
+    // Only run entire function if the angle has not been found yet
     if (this.angles[0] === 0) {
-      // If the angle method has already been called, don't run the entire thing again.
       let solvingSide: number = 0 // the side that is paired with the angle being solved
       let givenSideA: number = 0 // a side to help solve the angle
       let givenSideB: number = 0 // another side to help solve the angle
@@ -256,15 +257,17 @@ export class Shape {
             givenSideB = this.sideLengths[1]
           }
           // use cosine law
-            this.angles[angleNumber] = Math.acos(
-              (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
+          this.angles[angleNumber] = Math.acos(
+            (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
               (2 * givenSideA * givenSideB)
-            )
+          )
+          // convert the angle from radians to degrees and round to the nearest hundredth
+          this.angles[angleNumber] = Math.round((this.angles[angleNumber] * (180 / Math.PI)) * 100) / 100
         }
       } else {
         // This is what the rest of the shapes use to find the angles
         const numberOfTriangles = this.amountOfDiagonals + 1
-        let innerTriangleAngles: number[][] = Array.from({ length: numberOfTriangles }, () => [])
+        const innerTriangleAngles: number[][] = Array.from({ length: numberOfTriangles }, () => [])
         const oneLessTriangle = numberOfTriangles - 1
         // The first inner triangle is different from the rest of the inner triangles
         for (let angleNumber = 0; angleNumber < this.amountOfSides; angleNumber++) {
@@ -344,8 +347,10 @@ export class Shape {
         for (let counter = 0; counter < numberOfTriangles; counter++) {
           this.angles[0] = this.angles[0] + innerTriangleAngles[counter][0]
         }
-        // This is for the angle right after the top angle which has no diagonals.
-        this.angles[1] = innerTriangleAngles[0][1]
+        // convert the angle from radians to degrees and round to the nearest hundredth
+        this.angles[0] = Math.round((this.angles[0] * (180 / Math.PI)) * 100) / 100
+        // This is for the angle after the top angle which has no diagonals.
+        this.angles[1] = Math.round((innerTriangleAngles[0][1] * (180 / Math.PI)) * 100) / 100
         // This is for the angles containing a diagonal.
         // This is a makeshift for loop to add counter mid loop instead of at the end.
         let counter = 0
@@ -353,8 +358,12 @@ export class Shape {
           const counterPlusTwo = counter + 2
           this.angles[counterPlusTwo] = innerTriangleAngles[counter][2]
           counter++
-          this.angles[counterPlusTwo] = innerTriangleAngles[counter][1]
+          this.angles[counterPlusTwo] = this.angles[counterPlusTwo] + innerTriangleAngles[counter][1]
+          // convert the angle from radians to degrees and round to the nearest hundredth
+          this.angles[counterPlusTwo] = Math.round((this.angles[counterPlusTwo] * (180 / Math.PI)) * 100) / 100
         }
+        // This is for the last angle of the shape.
+        this.angles[this.amountOfSides - 1] = Math.round((innerTriangleAngles[oneLessTriangle][2] * (180 / Math.PI)) * 100) / 100
       }
     }
     return this.angles[indexOfAngle]

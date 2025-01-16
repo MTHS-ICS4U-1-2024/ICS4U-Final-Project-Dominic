@@ -10,18 +10,8 @@ import { Shape } from './Shape'
 
 export class Quadrilateral extends Shape {
   /**
-   * The constructor for the Quadrilateral class.
-   *
-   * @param {number[]} sides
-   * @param {number[]} diagonals
-   */
-  constructor (sides: number[], diagonals: number[]) {
-    super(sides, diagonals)
-  }
-
-  /**
    * The area method.
-   * 
+   *
    * @return {number} of area
    */
   public area (): number {
@@ -37,6 +27,7 @@ export class Quadrilateral extends Shape {
         (this.semiPerimeters()[1] - this.sideLengths[2]) *
         (this.semiPerimeters()[1] - this.sideLengths[3])
       )
+      areaOfQuadrilateral = Math.round(areaOfQuadrilateral * 100) / 100
     } else {
       areaOfQuadrilateral = -1
     }
@@ -45,7 +36,7 @@ export class Quadrilateral extends Shape {
 
   /**
    * This method finds the type of quadrilateral.
-   * 
+   *
    * @return {string} of quadrilateral type
    */
   public type (): string {
