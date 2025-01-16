@@ -952,6 +952,8 @@ while (!endProgram) {
   const endProgramInput = createPrompt('\nWould you like to end the program? (y/n): ')
   if (endProgramInput.value === 'y' || endProgramInput.value === 'Y') {
     endProgram = true
+  } else {
+    console.log('No was selected.')
   }
 }
 console.log('\nDone.')
