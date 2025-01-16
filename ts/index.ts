@@ -7,14 +7,14 @@
  */
 
 import { createPrompt } from 'bun-promptx'
-import { Triangle } from './Triangle'
-import { Quadrilateral } from './Quadrilateral'
-import { Pentagon } from './Pentagon'
-import { Hexagon } from './Hexagon'
-import { Heptagon } from './Heptagon'
-import { Octagon } from './Octagon'
-import { Nonagon } from './Nonagon'
-import { Decagon } from './Decagon'
+import { Triangle } from './Shapes/Triangle'
+import { Quadrilateral } from './Shapes/Quadrilateral'
+import { Pentagon } from './Shapes/Pentagon'
+import { Hexagon } from './Shapes/Hexagon'
+import { Heptagon } from './Shapes/Heptagon'
+import { Octagon } from './Shapes/Octagon'
+import { Nonagon } from './Shapes/Nonagon'
+import { Decagon } from './Shapes/Decagon'
 
 console.log('This program calculates the dimentions of a shapes with 3-10 sides.')
 
