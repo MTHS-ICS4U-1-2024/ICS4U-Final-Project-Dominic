@@ -24,6 +24,7 @@ export class Triangle extends Shape {
         (arrayOfSemiperimeters - this.sideLengths[1]) *
         (arrayOfSemiperimeters - this.sideLengths[2])
       )
+      areaOfTriangle = Math.round(areaOfTriangle * 100) / 100
     } else {
       areaOfTriangle = -1
     }

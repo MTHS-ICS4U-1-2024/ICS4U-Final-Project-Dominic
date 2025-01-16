@@ -52,6 +52,7 @@ export class Nonagon extends Shape {
         (this.semiPerimeters()[6] - this.sideLengths[7]) *
         (this.semiPerimeters()[6] - this.sideLengths[8])
       )
+      areaOfNonagon = Math.round(areaOfNonagon * 100) / 100
     } else {
       areaOfNonagon = -1
     }

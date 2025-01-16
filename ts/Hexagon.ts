@@ -37,6 +37,7 @@ export class Hexagon extends Shape {
         (this.semiPerimeters()[3] - this.sideLengths[4]) *
         (this.semiPerimeters()[3] - this.sideLengths[5])
       )
+      areaOfHexagon = Math.round(areaOfHexagon * 100) / 100
     } else {
       areaOfHexagon = -1
     }

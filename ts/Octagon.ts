@@ -47,6 +47,7 @@ export class Octagon extends Shape {
         (this.semiPerimeters()[5] - this.sideLengths[6]) *
         (this.semiPerimeters()[5] - this.sideLengths[7])
       )
+      areaOfOctagon = Math.round(areaOfOctagon * 100) / 100
     } else {
       areaOfOctagon = -1
     }

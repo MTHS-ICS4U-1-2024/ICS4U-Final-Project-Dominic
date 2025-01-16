@@ -42,6 +42,7 @@ export class Heptagon extends Shape {
         (this.semiPerimeters()[4] - this.sideLengths[5]) *
         (this.semiPerimeters()[4] - this.sideLengths[6])
       )
+      areaOfHeptagon = Math.round(areaOfHeptagon * 100) / 100
     } else {
       areaOfHeptagon = -1
     }

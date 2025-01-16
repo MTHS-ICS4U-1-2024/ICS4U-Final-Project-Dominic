@@ -32,6 +32,7 @@ export class Pentagon extends Shape {
         (this.semiPerimeters()[2] - this.sideLengths[3]) *
         (this.semiPerimeters()[2] - this.sideLengths[4])
       )
+      areaOfPentagon = Math.round(areaOfPentagon * 100) / 100
     } else {
       areaOfPentagon = -1
     }

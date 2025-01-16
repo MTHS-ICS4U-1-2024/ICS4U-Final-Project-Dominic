@@ -27,6 +27,7 @@ export class Quadrilateral extends Shape {
         (this.semiPerimeters()[1] - this.sideLengths[2]) *
         (this.semiPerimeters()[1] - this.sideLengths[3])
       )
+      areaOfQuadrilateral = Math.round(areaOfQuadrilateral * 100) / 100
     } else {
       areaOfQuadrilateral = -1
     }

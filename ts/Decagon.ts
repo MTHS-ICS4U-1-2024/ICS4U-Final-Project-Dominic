@@ -57,6 +57,7 @@ export class Decagon extends Shape {
         (this.semiPerimeters()[7] - this.sideLengths[8]) *
         (this.semiPerimeters()[7] - this.sideLengths[9])
       )
+      areaOfDecagon = Math.round(areaOfDecagon * 100) / 100
     } else {
       areaOfDecagon = -1
     }
