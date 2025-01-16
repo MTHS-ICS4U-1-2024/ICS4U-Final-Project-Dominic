@@ -16,7 +16,9 @@ import { Octagon } from './Shapes/Octagon'
 import { Nonagon } from './Shapes/Nonagon'
 import { Decagon } from './Shapes/Decagon'
 
-console.log('This program calculates the dimentions of a shapes with 3-10 sides.')
+console.log('This program calculates the dimentions of a polygons between 3-10 sides.')
+console.log('The program will ask for the side lengths and diagonal lengths of the shape.')
+console.log('The program will then calculate the perimeter, area, angles, and other information about the shape.')
 
 let endProgram = false
 
@@ -26,6 +28,7 @@ while (!endProgram) {
   const sideAmountInputs: number[] = []
   let endLoop: boolean = false
   let sideCounter = 0
+  let showInformation = true
 
   while (!endLoop) {
     const sideAmountInput = createPrompt('\nEnter a side length: ')
@@ -102,23 +105,26 @@ while (!endProgram) {
       if (triangle.perimeter() === -1) {
         console.log('\nInvalid Shape.')
         endProgram = true
-      } else {
-        console.log('\nHere are the options for your shape.')
-        console.log('"1" for name of shape')
-        console.log('"2" for side lengths')
-        console.log('"3" for perimeter')
-        console.log('"4" for to see if the shape is regular')
-        console.log('"5" for angles')
-        console.log('"6" for area')
-        console.log('"7" for type of triangle')
-        console.log('"8" for height of triangle')
-        console.log('"9" for inner circle radius')
-        console.log('"10" for circumcircle radius')
-        console.log('"x" to exit')
       }
 
       while (!endProgram) {
-        const optionInput = createPrompt('\nEnter an option: ')
+        if (showInformation) {
+          console.log('\nHere are the options for your shape.')
+          console.log('"1" for name of shape')
+          console.log('"2" for side lengths')
+          console.log('"3" for perimeter')
+          console.log('"4" for to see if the shape is regular')
+          console.log('"5" for angles')
+          console.log('"6" for area')
+          console.log('"7" for type of triangle')
+          console.log('"8" for height of triangle')
+          console.log('"9" for inner circle radius')
+          console.log('"10" for circumcircle radius')
+          console.log('"x" to exit')
+          showInformation = false
+        }
+        console.log('\nPress "i" to see the options again.')
+        const optionInput = createPrompt('Enter an option: ')
         if (optionInput.value !== null) {
           switch (optionInput.value) {
             case '1': {
@@ -167,7 +173,7 @@ while (!endProgram) {
                   } else if (angle <= 0 || angle > 3) {
                     throw new Error('Invalid number')
                   } else {
-                    console.log(`The angle is ${triangle.angle(angle)}`)
+                    console.log(`The angle is ${triangle.angle(angle)} °`)
                   }
                 } else {
                   throw new Error('Invalid number')
@@ -221,6 +227,10 @@ while (!endProgram) {
               endProgram = true
               break
             }
+            case 'i': {
+              showInformation = true
+            break
+            }
             default: {
               console.log('\nInvalid option')
               break
@@ -239,21 +249,23 @@ while (!endProgram) {
       if (quadrilateral.perimeter() === -1) {
         console.log('\nInvalid Shape.')
         endProgram2 = true
-      } else {
-        console.log('\nHere are the options for your shape.')
-        console.log('"1" for name of shape')
-        console.log('"2" for side lengths')
-        console.log('"3" for perimeter')
-        console.log('"4" for to see if the shape is regular')
-        console.log('"5" for angles')
-        console.log('"6" for area')
-        console.log('"7" for type of quadrilateral')
-        console.log('"x" to exit')
       }
 
       while (!endProgram2) {
-        const optionInput = createPrompt('\nEnter an option: ')
-
+        if (showInformation) {
+          console.log('\nHere are the options for your shape.')
+          console.log('"1" for name of shape')
+          console.log('"2" for side lengths')
+          console.log('"3" for perimeter')
+          console.log('"4" for to see if the shape is regular')
+          console.log('"5" for angles')
+          console.log('"6" for area')
+          console.log('"7" for type of quadrilateral')
+          console.log('"x" to exit')
+          showInformation = false
+        }
+        console.log('\nPress "i" to see the options again.')
+        const optionInput = createPrompt('Enter an option: ')
         if (optionInput.value !== null) {
           switch (optionInput.value) {
             case '1': {
@@ -302,7 +314,7 @@ while (!endProgram) {
                   } else if (angle <= 0 || angle > 4) {
                     throw new Error('Invalid number')
                   } else {
-                    console.log(`The angle is ${quadrilateral.angle(angle)}`)
+                    console.log(`The angle is ${quadrilateral.angle(angle)} °`)
                   }
                 } else {
                   throw new Error('Invalid number')
@@ -328,6 +340,10 @@ while (!endProgram) {
               endProgram2 = true
               break
             }
+            case 'i': {
+              showInformation = true
+            break
+            }
             default: {
               console.log('\nInvalid option')
               break
@@ -346,20 +362,22 @@ while (!endProgram) {
       if (pentagon.perimeter() === -1) {
         console.log('\nInvalid Shape.')
         endProgram3 = true
-      } else {
-        console.log('\nHere are the options for your shape.')
-        console.log('"1" for name of shape')
-        console.log('"2" for side lengths')
-        console.log('"3" for perimeter')
-        console.log('"4" for to see if the shape is regular')
-        console.log('"5" for angles')
-        console.log('"6" for area')
-        console.log('"x" to exit')
       }
 
       while (!endProgram3) {
-        const optionInput = createPrompt('\nEnter an option: ')
-
+        if (showInformation) {
+          console.log('\nHere are the options for your shape.')
+          console.log('"1" for name of shape')
+          console.log('"2" for side lengths')
+          console.log('"3" for perimeter')
+          console.log('"4" for to see if the shape is regular')
+          console.log('"5" for angles')
+          console.log('"6" for area')
+          console.log('"x" to exit')
+          showInformation = false
+        }
+        console.log('\nPress "i" to see the options again.')
+        const optionInput = createPrompt('Enter an option: ')
         if (optionInput.value !== null) {
           switch (optionInput.value) {
             case '1': {
@@ -408,7 +426,7 @@ while (!endProgram) {
                   } else if (angle <= 0 || angle > 5) {
                     throw new Error('Invalid number')
                   } else {
-                    console.log(`The angle is ${pentagon.angle(angle)}`)
+                    console.log(`The angle is ${pentagon.angle(angle)} °`)
                   }
                 } else {
                   throw new Error('Invalid number')
@@ -430,6 +448,10 @@ while (!endProgram) {
               endProgram3 = true
               break
             }
+            case 'i': {
+              showInformation = true
+            break
+            }
             default: {
               console.log('\nInvalid option')
               break
@@ -448,20 +470,22 @@ while (!endProgram) {
       if (hexagon.perimeter() === -1) {
         console.log('\nInvalid Shape.')
         endProgram4 = true
-      } else {
-        console.log('\nHere are the options for your shape.')
-        console.log('"1" for name of shape')
-        console.log('"2" for side lengths')
-        console.log('"3" for perimeter')
-        console.log('"4" for to see if the shape is regular')
-        console.log('"5" for angles')
-        console.log('"6" for area')
-        console.log('"x" to exit')
       }
 
       while (!endProgram4) {
-        const optionInput = createPrompt('\nEnter an option: ')
-
+        if (showInformation) {
+          console.log('\nHere are the options for your shape.')
+          console.log('"1" for name of shape')
+          console.log('"2" for side lengths')
+          console.log('"3" for perimeter')
+          console.log('"4" for to see if the shape is regular')
+          console.log('"5" for angles')
+          console.log('"6" for area')
+          console.log('"x" to exit')
+          showInformation = false
+        }
+        console.log('\nPress "i" to see the options again.')
+        const optionInput = createPrompt('Enter an option: ')
         if (optionInput.value !== null) {
           switch (optionInput.value) {
             case '1': {
@@ -510,7 +534,7 @@ while (!endProgram) {
                   } else if (angle <= 0 || angle > 6) {
                     throw new Error('Invalid number')
                   } else {
-                    console.log(`The angle is ${hexagon.angle(angle)}`)
+                    console.log(`The angle is ${hexagon.angle(angle)} °`)
                   }
                 } else {
                   throw new Error('Invalid number')
@@ -532,6 +556,10 @@ while (!endProgram) {
               endProgram4 = true
               break
             }
+            case 'i': {
+              showInformation = true
+            break
+            }
             default: {
               console.log('\nInvalid option')
               break
@@ -550,20 +578,22 @@ while (!endProgram) {
       if (heptagon.perimeter() === -1) {
         console.log('\nInvalid Shape.')
         endProgram5 = true
-      } else {
-        console.log('\nHere are the options for your shape.')
-        console.log('"1" for name of shape')
-        console.log('"2" for side lengths')
-        console.log('"3" for perimeter')
-        console.log('"4" for to see if the shape is regular')
-        console.log('"5" for angles')
-        console.log('"6" for area')
-        console.log('"x" to exit')
       }
 
       while (!endProgram5) {
-        const optionInput = createPrompt('\nEnter an option: ')
-
+        if (showInformation) {
+          console.log('\nHere are the options for your shape.')
+          console.log('"1" for name of shape')
+          console.log('"2" for side lengths')
+          console.log('"3" for perimeter')
+          console.log('"4" for to see if the shape is regular')
+          console.log('"5" for angles')
+          console.log('"6" for area')
+          console.log('"x" to exit')
+          showInformation = false
+        }
+        console.log('\nPress "i" to see the options again.')
+        const optionInput = createPrompt('Enter an option: ')
         if (optionInput.value !== null) {
           switch (optionInput.value) {
             case '1': {
@@ -612,7 +642,7 @@ while (!endProgram) {
                   } else if (angle <= 0 || angle > 7) {
                     throw new Error('Invalid number')
                   } else {
-                    console.log(`The angle is ${heptagon.angle(angle)}`)
+                    console.log(`The angle is ${heptagon.angle(angle)} °`)
                   }
                 } else {
                   throw new Error('Invalid number')
@@ -634,6 +664,10 @@ while (!endProgram) {
               endProgram5 = true
               break
             }
+            case 'i': {
+              showInformation = true
+            break
+            }
             default: {
               console.log('\nInvalid option')
               break
@@ -652,20 +686,22 @@ while (!endProgram) {
       if (octogon.perimeter() === -1) {
         console.log('\nInvalid Shape.')
         endProgram6 = true
-      } else {
-        console.log('\nHere are the options for your shape.')
-        console.log('"1" for name of shape')
-        console.log('"2" for side lengths')
-        console.log('"3" for perimeter')
-        console.log('"4" for to see if the shape is regular')
-        console.log('"5" for angles')
-        console.log('"6" for area')
-        console.log('"x" to exit')
       }
 
       while (!endProgram6) {
-        const optionInput = createPrompt('\nEnter an option: ')
-
+        if (showInformation) {
+          console.log('\nHere are the options for your shape.')
+          console.log('"1" for name of shape')
+          console.log('"2" for side lengths')
+          console.log('"3" for perimeter')
+          console.log('"4" for to see if the shape is regular')
+          console.log('"5" for angles')
+          console.log('"6" for area')
+          console.log('"x" to exit')
+          showInformation = false
+        }
+        console.log('\nPress "i" to see the options again.')
+        const optionInput = createPrompt('Enter an option: ')
         if (optionInput.value !== null) {
           switch (optionInput.value) {
             case '1': {
@@ -714,7 +750,7 @@ while (!endProgram) {
                   } else if (angle <= 0 || angle > 8) {
                     throw new Error('Invalid number')
                   } else {
-                    console.log(`The angle is ${octogon.angle(angle)}`)
+                    console.log(`The angle is ${octogon.angle(angle)} °`)
                   }
                 } else {
                   throw new Error('Invalid number')
@@ -736,6 +772,10 @@ while (!endProgram) {
               endProgram6 = true
               break
             }
+            case 'i': {
+              showInformation = true
+            break
+            }
             default: {
               console.log('\nInvalid option')
               break
@@ -754,20 +794,22 @@ while (!endProgram) {
       if (nonagon.perimeter() === -1) {
         console.log('\nInvalid Shape.')
         endProgram7 = true
-      } else {
-        console.log('\nHere are the options for your shape.')
-        console.log('"1" for name of shape')
-        console.log('"2" for side lengths')
-        console.log('"3" for perimeter')
-        console.log('"4" for to see if the shape is regular')
-        console.log('"5" for angles')
-        console.log('"6" for area')
-        console.log('"x" to exit')
       }
 
       while (!endProgram7) {
-        const optionInput = createPrompt('\nEnter an option: ')
-
+        if (showInformation) {
+          console.log('\nHere are the options for your shape.')
+          console.log('"1" for name of shape')
+          console.log('"2" for side lengths')
+          console.log('"3" for perimeter')
+          console.log('"4" for to see if the shape is regular')
+          console.log('"5" for angles')
+          console.log('"6" for area')
+          console.log('"x" to exit')
+          showInformation = false
+        }
+        console.log('\nPress "i" to see the options again.')
+        const optionInput = createPrompt('Enter an option: ')
         if (optionInput.value !== null) {
           switch (optionInput.value) {
             case '1': {
@@ -816,7 +858,7 @@ while (!endProgram) {
                   } else if (angle <= 0 || angle > 9) {
                     throw new Error('Invalid number')
                   } else {
-                    console.log(`The angle is ${nonagon.angle(angle)}`)
+                    console.log(`The angle is ${nonagon.angle(angle)} °`)
                   }
                 } else {
                   throw new Error('Invalid number')
@@ -838,6 +880,10 @@ while (!endProgram) {
               endProgram7 = true
               break
             }
+            case 'i': {
+              showInformation = true
+            break
+            }
             default: {
               console.log('\nInvalid option')
               break
@@ -856,20 +902,22 @@ while (!endProgram) {
       if (decagon.perimeter() === -1) {
         console.log('\nInvalid Shape.')
         endProgram8 = true
-      } else {
-        console.log('\nHere are the options for your shape.')
-        console.log('"1" for name of shape')
-        console.log('"2" for side lengths')
-        console.log('"3" for perimeter')
-        console.log('"4" for to see if the shape is regular')
-        console.log('"5" for angles')
-        console.log('"6" for area')
-        console.log('"x" to exit')
       }
 
       while (!endProgram8) {
-        const optionInput = createPrompt('\nEnter an option: ')
-
+        if (showInformation) {
+          console.log('\nHere are the options for your shape.')
+          console.log('"1" for name of shape')
+          console.log('"2" for side lengths')
+          console.log('"3" for perimeter')
+          console.log('"4" for to see if the shape is regular')
+          console.log('"5" for angles')
+          console.log('"6" for area')
+          console.log('"x" to exit')
+          showInformation = false
+        }
+        console.log('\nPress "i" to see the options again.')
+        const optionInput = createPrompt('Enter an option: ')
         if (optionInput.value !== null) {
           switch (optionInput.value) {
             case '1': {
@@ -918,7 +966,7 @@ while (!endProgram) {
                   } else if (angle <= 0 || angle > 10) {
                     throw new Error('Invalid number')
                   } else {
-                    console.log(`The angle is ${decagon.angle(angle)}`)
+                    console.log(`The angle is ${decagon.angle(angle)} °`)
                   }
                 } else {
                   throw new Error('Invalid number')
@@ -940,6 +988,10 @@ while (!endProgram) {
               endProgram8 = true
               break
             }
+            case 'i': {
+              showInformation = true
+            break
+            }
             default: {
               console.log('\nInvalid option')
               break
@@ -954,11 +1006,17 @@ while (!endProgram) {
       break
     }
   }
-  const endProgramInput = createPrompt('\nWould you like to end the program? (y/n): ')
-  if (endProgramInput.value === 'y' || endProgramInput.value === 'Y') {
-    endProgram = true
-  } else {
-    console.log('No was selected.')
+  let invalidInput = true
+  while (invalidInput) {
+    const endProgramInput = createPrompt('\nWould you like to end the program? (y/n): ')
+    if (endProgramInput.value === 'y' || endProgramInput.value === 'Y') {
+      endProgram = true
+      invalidInput = false
+    } else if (endProgramInput.value === 'n' || endProgramInput.value === 'N') {
+      invalidInput = false
+    } else {
+      console.log('Invalid input, please enter y or n.')
+    }
   }
 }
 console.log('\nDone.')
