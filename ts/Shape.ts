@@ -260,8 +260,8 @@ export class Shape {
               (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
               (2 * givenSideA * givenSideB)
             )
-          // convert the angle from radians to degrees
-          this.angles[angleNumber] = this.angles[angleNumber] * (180 / Math.PI)
+          // convert the angle from radians to degrees and round to the nearest hundredth
+          this.angles[angleNumber] = Math.round((this.angles[angleNumber] * (180 / Math.PI)) * 100) / 100
         }
       } else {
         // This is what the rest of the shapes use to find the angles
@@ -291,8 +291,6 @@ export class Shape {
             (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
             (2 * givenSideA * givenSideB))
           )
-          // convert the angle from radians to degrees
-          innerTriangleAngles[0][angleNumber] = innerTriangleAngles[0][angleNumber] * (180 / Math.PI)
         }
         // This loop is for the rest of the inner triangles
         for (let triangleNumber = 1; triangleNumber < oneLessTriangle; triangleNumber++) {
@@ -318,8 +316,6 @@ export class Shape {
               (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
               (2 * givenSideA * givenSideB))
             )
-            // convert the angle from radians to degrees
-            innerTriangleAngles[0][angleNumber] = innerTriangleAngles[0][angleNumber] * (180 / Math.PI)
           }
         }
         // This loop is for the last triangle
@@ -345,15 +341,15 @@ export class Shape {
             (((givenSideA ** 2) + (givenSideB ** 2)) - (solvingSide ** 2)) /
             (2 * givenSideA * givenSideB))
           )
-          // convert the angle from radians to degrees
-          innerTriangleAngles[0][angleNumber] = innerTriangleAngles[0][angleNumber] * (180 / Math.PI)
         }
         // This is for adding all of the smaller angles that form the top angle.
         for (let counter = 0; counter < numberOfTriangles; counter++) {
           this.angles[0] = this.angles[0] + innerTriangleAngles[counter][0]
         }
+        // convert the angle from radians to degrees and round to the nearest hundredth
+        this.angles[0] = Math.round((this.angles[0] * (180 / Math.PI)) * 100) / 100
         // This is for the angle right after the top angle which has no diagonals.
-        this.angles[1] = innerTriangleAngles[0][1]
+        this.angles[1] = Math.round((innerTriangleAngles[0][1] * (180 / Math.PI)) * 100) / 100
         // This is for the angles containing a diagonal.
         // This is a makeshift for loop to add counter mid loop instead of at the end.
         let counter = 0
@@ -362,6 +358,8 @@ export class Shape {
           this.angles[counterPlusTwo] = innerTriangleAngles[counter][2]
           counter++
           this.angles[counterPlusTwo] = innerTriangleAngles[counter][1]
+          // convert the angle from radians to degrees and round to the nearest hundredth
+          this.angles[counterPlusTwo] = Math.round((this.angles[counterPlusTwo] * (180 / Math.PI)) * 100) / 100
         }
       }
     }
