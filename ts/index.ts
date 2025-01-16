@@ -64,6 +64,11 @@ while (!endProgram) {
 
   const diagonalAmountInputs: number[] = []
   let diagonalCounter = 0
+  const diagonalAmounts = sideCounter - 3
+
+  if (sideCounter > 3) {
+    console.log(`\nPlease enter ${diagonalAmounts} diagonal lengths.`)
+  }
 
   while (diagonalCounter < sideCounter - 3) {
     const diagonalAmountInput = createPrompt('\nEnter a diagonal length: ')
