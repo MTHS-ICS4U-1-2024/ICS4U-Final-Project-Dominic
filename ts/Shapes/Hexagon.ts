@@ -17,6 +17,7 @@ export class Hexagon extends Shape {
   public area (): number {
     let areaOfHexagon: number
     if (this.isValid()) {
+      // Finds the area of the hexagon by breaking it down into 4 triangles
       areaOfHexagon = Math.sqrt(
         (this.semiPerimeters()[0] - this.sideLengths[0]) *
         (this.semiPerimeters()[0] - this.sideLengths[1]) *
@@ -37,8 +38,10 @@ export class Hexagon extends Shape {
         (this.semiPerimeters()[3] - this.sideLengths[4]) *
         (this.semiPerimeters()[3] - this.sideLengths[5])
       )
+      // Rounds the area to 2 decimal places
       areaOfHexagon = Math.round(areaOfHexagon * 100) / 100
     } else {
+      // If the hexagon is invalid, set the area to -1
       areaOfHexagon = -1
     }
     return areaOfHexagon

@@ -17,6 +17,7 @@ export class Octagon extends Shape {
   public area (): number {
     let areaOfOctagon: number
     if (this.isValid()) {
+      // Finds the area of the octagon by breaking it down into 6 triangles
       areaOfOctagon = Math.sqrt(
         (this.semiPerimeters()[0] - this.sideLengths[0]) *
         (this.semiPerimeters()[0] - this.sideLengths[1]) *
@@ -47,8 +48,10 @@ export class Octagon extends Shape {
         (this.semiPerimeters()[5] - this.sideLengths[6]) *
         (this.semiPerimeters()[5] - this.sideLengths[7])
       )
+      // Rounds the area to 2 decimal places
       areaOfOctagon = Math.round(areaOfOctagon * 100) / 100
     } else {
+      // If the octagon is invalid, set the area to -1
       areaOfOctagon = -1
     }
     return areaOfOctagon
