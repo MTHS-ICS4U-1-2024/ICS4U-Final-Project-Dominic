@@ -17,6 +17,7 @@ export class Pentagon extends Shape {
   public area (): number {
     let areaOfPentagon: number
     if (this.isValid()) {
+      // Finds the area of the pentagon by breaking it down into 3 triangles
       areaOfPentagon = Math.sqrt(
         (this.semiPerimeters()[0] - this.sideLengths[0]) *
         (this.semiPerimeters()[0] - this.sideLengths[1]) *
@@ -32,8 +33,10 @@ export class Pentagon extends Shape {
         (this.semiPerimeters()[2] - this.sideLengths[3]) *
         (this.semiPerimeters()[2] - this.sideLengths[4])
       )
+      // Rounds the area to 2 decimal places
       areaOfPentagon = Math.round(areaOfPentagon * 100) / 100
     } else {
+      // If the pentagon is invalid, set the area to -1
       areaOfPentagon = -1
     }
     return areaOfPentagon

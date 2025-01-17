@@ -91,8 +91,10 @@ export class Shape {
    */
   public getName (): string {
     if (this.isValid()) {
+      // If the shape is valid, return the name
       return this.name
     } else {
+      // If the shape is invalid, return 'Invalid Shape'
       return 'Invalid Shape'
     }
   }
@@ -105,13 +107,17 @@ export class Shape {
    */
   public getSideLength (sideNumber: number): number {
     if (this.isValid()) {
+      // If the shape is valid, return the side length
       if (sideNumber <= this.amountOfSides && sideNumber > 0) {
+        // Decrease the side number by 1 to match the index
         sideNumber--
         return this.sideLengths[sideNumber]
       } else {
+        // If the side number is invalid, return -1
         return -1
       }
     } else {
+      // If the shape is invalid, return -1
       return -1
     }
   }
@@ -126,6 +132,7 @@ export class Shape {
       // find the sum of all of the lengths in the array
       return this.sideLengths.reduce((a, b) => a + b)
     } else {
+      // If the shape is invalid, return -1
       return -1
     }
   }
@@ -141,12 +148,15 @@ export class Shape {
       for (let anchorComparator = 0; anchorComparator < this.amountOfSides; anchorComparator++) {
         for (let sideComparator = 0; sideComparator < this.amountOfSides; sideComparator++) {
           if (this.sideLengths[anchorComparator] !== this.sideLengths[sideComparator]) {
+            // if any of the sides are not equal, return false
             return false
           }
         }
       }
+      // if all of the sides are equal, return true
       return true
     } else {
+      // If the shape is invalid, return false
       return false
     }
   }
@@ -172,11 +182,15 @@ export class Shape {
    */
   protected isValid (): boolean {
     if (this.name === 'inValid') {
+      // If the name is invalid, return false
       return false
     } else {
+      // Uses the formula for the sum of the angles of a polygon to check if the shape is valid
       if (this.sumOfAngles() !== (this.amountOfSides - 2) * 180) {
+        // If the sum of the angles is not equal to the formula, the shape is invalid
         return false
       } else {
+        // If the sum of the angles is equal to the formula, the shape is valid
         return true
       }
     }
@@ -220,6 +234,7 @@ export class Shape {
       }
       return semiperimeters
     } else {
+      // If the shape is invalid, return an empty array
       return []
     }
   }
@@ -231,6 +246,7 @@ export class Shape {
    * @return angle in the spot of the index
    */
   public angle (indexOfAngle: number): number {
+    // Decrease the index of the angle by 1 to match the array index
     indexOfAngle--
     // Only run entire function if the angle has not been found yet
     if (this.angles[0] === 0) {

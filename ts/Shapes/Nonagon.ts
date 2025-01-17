@@ -17,6 +17,7 @@ export class Nonagon extends Shape {
   public area (): number {
     let areaOfNonagon: number
     if (this.isValid()) {
+      // Finds the area of the nonagon by breaking it down into 7 triangles
       areaOfNonagon = Math.sqrt(
         (this.semiPerimeters()[0] - this.sideLengths[0]) *
         (this.semiPerimeters()[0] - this.sideLengths[1]) *
@@ -52,8 +53,10 @@ export class Nonagon extends Shape {
         (this.semiPerimeters()[6] - this.sideLengths[7]) *
         (this.semiPerimeters()[6] - this.sideLengths[8])
       )
+      // Rounds the area to 2 decimal places
       areaOfNonagon = Math.round(areaOfNonagon * 100) / 100
     } else {
+      // If the nonagon is invalid, set the area to -1
       areaOfNonagon = -1
     }
     return areaOfNonagon

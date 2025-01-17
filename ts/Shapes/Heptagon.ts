@@ -17,6 +17,7 @@ export class Heptagon extends Shape {
   public area (): number {
     let areaOfHeptagon: number
     if (this.isValid()) {
+      // Finds the area of the heptagon by breaking it down into 5 triangles
       areaOfHeptagon = Math.sqrt(
         (this.semiPerimeters()[0] - this.sideLengths[0]) *
         (this.semiPerimeters()[0] - this.sideLengths[1]) *
@@ -42,8 +43,10 @@ export class Heptagon extends Shape {
         (this.semiPerimeters()[4] - this.sideLengths[5]) *
         (this.semiPerimeters()[4] - this.sideLengths[6])
       )
+      // Rounds the area to 2 decimal places
       areaOfHeptagon = Math.round(areaOfHeptagon * 100) / 100
     } else {
+      // If the heptagon is invalid, set the area to -1
       areaOfHeptagon = -1
     }
     return areaOfHeptagon

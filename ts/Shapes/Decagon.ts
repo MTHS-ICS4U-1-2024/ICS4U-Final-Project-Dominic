@@ -17,6 +17,7 @@ export class Decagon extends Shape {
   public area (): number {
     let areaOfDecagon: number
     if (this.isValid()) {
+      // Finds the area of the decagon by breaking it down into 8 triangles
       areaOfDecagon = Math.sqrt(
         (this.semiPerimeters()[0] - this.sideLengths[0]) *
         (this.semiPerimeters()[0] - this.sideLengths[1]) *
@@ -57,8 +58,10 @@ export class Decagon extends Shape {
         (this.semiPerimeters()[7] - this.sideLengths[8]) *
         (this.semiPerimeters()[7] - this.sideLengths[9])
       )
+      // Rounds the area to 2 decimal places
       areaOfDecagon = Math.round(areaOfDecagon * 100) / 100
     } else {
+      // If the decagon is invalid, the area is set to -1
       areaOfDecagon = -1
     }
     return areaOfDecagon
