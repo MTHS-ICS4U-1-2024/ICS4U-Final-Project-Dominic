@@ -84,8 +84,12 @@ while (!endProgram) {
 
   // Loop to get the diagonal lengths from the user
   while (diagonalCounter < sideCounter - 3) {
-    const diagonalAmountInput = createPrompt('\nEnter a diagonal length: ')
+    console.log('\nPress x to end the program.')
+    const diagonalAmountInput = createPrompt('Enter a diagonal length: ')
 
+    if (diagonalAmountInput.value === 'x' || diagonalAmountInput.value === 'X') {
+      break
+    }
     try {
       if (diagonalAmountInput.value !== null) {
         // Parse the input to a float
