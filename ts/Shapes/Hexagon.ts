@@ -10,7 +10,7 @@ import { Shape } from './Shape'
 
 export class Hexagon extends Shape {
   /**
-   * The area method.
+   * The area method which is overwrites the area method of the parent class.
    *
    * @return {number} of area
    */

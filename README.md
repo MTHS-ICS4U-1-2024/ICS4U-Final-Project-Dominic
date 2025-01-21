@@ -20,12 +20,17 @@ To install Bun, use the following command:
 curl -fsSL https://bun.sh/install | bash
 ```
 
+After installing, refresh the .bashrc using:
+```bash
+source ~/.bashrc
+```
+
 To install bun-promptx, use the following command:
 ```bash
 bun install add bun-promptx --save-dev
 ```
 
-- Once all of this is done, you can run the program by using the command:
+Once all of this is done, you can run the program by using the command:
 ```bash
 bun run index.ts
 ```

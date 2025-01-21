@@ -10,31 +10,6 @@ import { Shape } from './Shape'
 
 export class Triangle extends Shape {
   /**
-   * The area method.
-   *
-   * @return {number} of area
-   */
-  public area (): number {
-    let areaOfTriangle: number
-    if (this.isValid()) {
-      const arrayOfSemiperimeters: number = this.semiPerimeters()[0]
-      // Finds the area of the triangle using Heron's formula
-      areaOfTriangle = Math.sqrt(
-        arrayOfSemiperimeters *
-        (arrayOfSemiperimeters - this.sideLengths[0]) *
-        (arrayOfSemiperimeters - this.sideLengths[1]) *
-        (arrayOfSemiperimeters - this.sideLengths[2])
-      )
-      // Rounds the area to 2 decimal places
-      areaOfTriangle = Math.round(areaOfTriangle * 100) / 100
-    } else {
-      // If the triangle is invalid, set the area to -1
-      areaOfTriangle = -1
-    }
-    return areaOfTriangle
-  }
-
-  /**
    * This method finds the type of triangle.
    *
    * @return {string} of triangle type
