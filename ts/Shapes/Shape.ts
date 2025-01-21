@@ -205,8 +205,8 @@ export abstract class Shape {
     if (this.isValid()) {
       const oneLessDiagonal = this.amountOfDiagonals - 1
       let numberOfTriangles: number
-      // fill the array with 0's for now
-      const semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
+      // create a list to store the semiperimeters
+      const semiperimeters = []
       for (numberOfTriangles = 0; numberOfTriangles < this.amountOfDiagonals; numberOfTriangles++) {
         const previousDiagonal = numberOfTriangles - 1
         const nextSide = numberOfTriangles + 1
