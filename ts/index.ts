@@ -22,6 +22,7 @@ console.log('The program will then calculate the perimeter, area, angles, and ot
 
 let endProgram = false
 
+// this forever loops until the user ends the program
 while (!endProgram) {
   console.log('\nEnter x to once you have typed all of your necessary sides.')
 
@@ -30,6 +31,7 @@ while (!endProgram) {
   let sideCounter = 0
   let showInformation = true
 
+  // this forever loops until the user is done with their shape.
   while (!endLoop) {
     // Get the side length from the user
     const sideAmountInput = createPrompt('\nEnter a side length: ')
