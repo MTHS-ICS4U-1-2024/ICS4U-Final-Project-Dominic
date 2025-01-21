@@ -29,3 +29,59 @@ bun install add bun-promptx --save-dev
 ```bash
 bun run index.ts
 ```
+
+
+## Possible Shapes
+Finding valid shapes could prove difficult, so here are some shapes to get started with. 
+
+###
+Triangle: 
+- Sides: 3, 4, 5
+- Diagonals: null
+###
+- Sides: 3, 3, 3
+- Diagonals: null
+###
+
+Quadrilateral:
+- Sides: 4, 4, 4, 4
+- Diagonal: 5.65685424949
+###
+- Sides: 11, 12, 13, 14
+- Diagonal: 15
+###
+
+Pentagon:
+- Sides: 5, 5, 5, 5, 5
+- Diagonals: 7.07106781187, 8.66025403784
+###
+- Sides: 2, 3, 4, 5, 6
+- Diagonals: 4, 5
+###
+
+Hexagon:
+- Sides: 4, 4, 4, 4, 4, 4
+- Diagonals: 5.65685424949, 6.92820323028, 8
+###
+- Sides: 3, 4, 5, 5, 6, 7
+- Diagonals: 7, 8, 9
+###
+
+Heptagon:
+- Sides: 3, 3, 3, 3, 3, 3, 3
+- Diagonals: 4.24264068712, 5.19615242271, 6, 4.24264068712
+###
+
+Octagon:
+- Sides: 3, 3, 3, 3, 3, 3, 3, 3
+- Diagonals: 4, 4, 4, 4, 4
+###
+
+Nonagon:
+- Sides: 3, 3, 3, 3, 3, 3, 3, 3, 3
+- Diagonals: 4, 4, 4, 4, 4, 4
+###
+
+Decagon:
+- Sides: 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+- Diagonals: 6, 6, 6, 6, 6, 6, 6
