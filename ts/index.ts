@@ -16,6 +16,16 @@ import { Octagon } from './Shapes/Octagon'
 import { Nonagon } from './Shapes/Nonagon'
 import { Decagon } from './Shapes/Decagon'
 
+function basicInfo () {
+  console.log('\nHere are the options for your shape.')
+  console.log('"1" for name of shape')
+  console.log('"2" for side lengths')
+  console.log('"3" for perimeter')
+  console.log('"4" for to see if the shape is regular')
+  console.log('"5" for angles')
+  console.log('"6" for area')
+}
+
 console.log('This program calculates the dimentions of a polygons between 3-10 sides.')
 console.log('The program will ask for the side lengths and diagonal lengths of the shape.')
 console.log('The program will then calculate the perimeter, area, angles, and other information about the shape.')
@@ -133,13 +143,7 @@ while (!endProgram) {
       while (!endProgram) {
         // Show the information for the shape
         if (showInformation) {
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"7" for type of triangle')
           console.log('"8" for height of triangle')
           console.log('"9" for inner circle radius')
@@ -316,13 +320,7 @@ while (!endProgram) {
       while (!endProgram2) {
         // Show the information for the shape
         if (showInformation) {
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"7" for type of quadrilateral')
           console.log('"x" to exit')
           showInformation = false
@@ -460,13 +458,7 @@ while (!endProgram) {
       while (!endProgram3) {
         // Show the information for the shape
         if (showInformation) {
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -597,13 +589,7 @@ while (!endProgram) {
       while (!endProgram4) {
         // Show the information for the shape
         if (showInformation) {
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -734,13 +720,7 @@ while (!endProgram) {
       while (!endProgram5) {
         if (showInformation) {
           // Show the information for the shape
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -871,13 +851,7 @@ while (!endProgram) {
       while (!endProgram6) {
         if (showInformation) {
           // Show the information for the shape
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -1008,13 +982,7 @@ while (!endProgram) {
       while (!endProgram7) {
         if (showInformation) {
           // Show the information for the shape
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -1145,13 +1113,7 @@ while (!endProgram) {
       while (!endProgram8) {
         if (showInformation) {
           // Show the information for the shape
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
