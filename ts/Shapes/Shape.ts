@@ -6,7 +6,7 @@
  * since   2025-01-07
  */
 
-export class Shape {
+export abstract class Shape {
   /**
    * The name of the shape.
    */
@@ -205,8 +205,8 @@ export class Shape {
     if (this.isValid()) {
       const oneLessDiagonal = this.amountOfDiagonals - 1
       let numberOfTriangles: number
-      // fill the array with 0's for now
-      const semiperimeters = new Array(this.amountOfDiagonals + 1).fill(0)
+      // create a list to store the semiperimeters
+      const semiperimeters = []
       for (numberOfTriangles = 0; numberOfTriangles < this.amountOfDiagonals; numberOfTriangles++) {
         const previousDiagonal = numberOfTriangles - 1
         const nextSide = numberOfTriangles + 1
@@ -383,5 +383,30 @@ export class Shape {
       }
     }
     return this.angles[indexOfAngle]
+  }
+
+  /**
+   * The area method for the shape class which will usually be overwritten by other classes.
+   *
+   * @return {number} of area
+   */
+  public area (): number {
+    let areaOfSingleTriangle: number
+    if (this.isValid()) {
+      const arrayOfSemiperimeters: number = this.semiPerimeters()[0]
+      // Finds the area of the triangle using Heron's formula
+      areaOfSingleTriangle = Math.sqrt(
+        arrayOfSemiperimeters *
+        (arrayOfSemiperimeters - this.sideLengths[0]) *
+        (arrayOfSemiperimeters - this.sideLengths[1]) *
+        (arrayOfSemiperimeters - this.sideLengths[2])
+      )
+      // Rounds the area to 2 decimal places
+      areaOfSingleTriangle = Math.round(areaOfSingleTriangle * 100) / 100
+    } else {
+      // If the triangle is invalid, set the area to -1
+      areaOfSingleTriangle = -1
+    }
+    return areaOfSingleTriangle
   }
 }

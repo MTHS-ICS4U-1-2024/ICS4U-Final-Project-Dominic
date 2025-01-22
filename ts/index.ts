@@ -16,12 +16,44 @@ import { Octagon } from './Shapes/Octagon'
 import { Nonagon } from './Shapes/Nonagon'
 import { Decagon } from './Shapes/Decagon'
 
+function basicInfo () {
+  console.log('\nHere are the options for your shape.')
+  console.log('"1" for name of shape')
+  console.log('"2" for side lengths')
+  console.log('"3" for perimeter')
+  console.log('"4" for to see if the shape is regular')
+  console.log('"5" for angles')
+  console.log('"6" for area')
+}
+
+function errorChecker (input: any, min: number, max: number): number {
+  try {
+    if (input.value !== null) {
+      // Parse the input to an integer
+      const inputtedInt = parseInt(input.value)
+      if (isNaN(inputtedInt)) {
+        throw new Error('Invalid number')
+      } else if (inputtedInt < min || inputtedInt > max) {
+        throw new Error('Invalid number')
+      } else {
+        return inputtedInt
+      }
+    } else {
+      throw new Error('Invalid number')
+    }
+  } catch (error) {
+    // If the input is null, NaN, or not between the min and max, then the program will return -1
+    return -1
+  }
+}
+
 console.log('This program calculates the dimentions of a polygons between 3-10 sides.')
 console.log('The program will ask for the side lengths and diagonal lengths of the shape.')
 console.log('The program will then calculate the perimeter, area, angles, and other information about the shape.')
 
 let endProgram = false
 
+// this forever loops until the user ends the program
 while (!endProgram) {
   console.log('\nEnter x to once you have typed all of your necessary sides.')
 
@@ -30,6 +62,7 @@ while (!endProgram) {
   let sideCounter = 0
   let showInformation = true
 
+  // this forever loops until the user is done with their shape.
   while (!endLoop) {
     // Get the side length from the user
     const sideAmountInput = createPrompt('\nEnter a side length: ')
@@ -84,8 +117,12 @@ while (!endProgram) {
 
   // Loop to get the diagonal lengths from the user
   while (diagonalCounter < sideCounter - 3) {
-    const diagonalAmountInput = createPrompt('\nEnter a diagonal length: ')
+    console.log('\nPress x to end the program.')
+    const diagonalAmountInput = createPrompt('Enter a diagonal length: ')
 
+    if (diagonalAmountInput.value === 'x' || diagonalAmountInput.value === 'X') {
+      break
+    }
     try {
       if (diagonalAmountInput.value !== null) {
         // Parse the input to a float
@@ -127,13 +164,7 @@ while (!endProgram) {
       while (!endProgram) {
         // Show the information for the shape
         if (showInformation) {
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"7" for type of triangle')
           console.log('"8" for height of triangle')
           console.log('"9" for inner circle radius')
@@ -159,22 +190,12 @@ while (!endProgram) {
             case '2': {
               // Get the side number from the user
               const sideLengthInput = createPrompt('Enter a side number: ')
-              try {
-                if (sideLengthInput.value !== null) {
-                  // Parse the input to an integer
-                  const sideLength = parseInt(sideLengthInput.value)
-                  if (isNaN(sideLength)) {
-                    throw new Error('Invalid number')
-                  } else if (sideLength <= 0 || sideLength > 3) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the side length
-                    console.log(`The side length is ${triangle.getSideLength(sideLength)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const sideLength = errorChecker(sideLengthInput, 1, 3)
+              if (sideLength > 0) {
+                // Print out the side length
+                console.log(`The side length is ${triangle.getSideLength(sideLength)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-3
                 console.log('Please enter a valid number')
               }
@@ -200,22 +221,12 @@ while (!endProgram) {
             case '5': {
               // Get the angle number from the user
               const angleInput = createPrompt('Enter an angle number: ')
-              try {
-                if (angleInput.value !== null) {
-                  // Parse the input to an integer
-                  const angle = parseInt(angleInput.value)
-                  if (isNaN(angle)) {
-                    throw new Error('Invalid number')
-                  } else if (angle <= 0 || angle > 3) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the angle corresponding to the angle number inputted
-                    console.log(`The angle is ${triangle.angle(angle)} °`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const angle = errorChecker(angleInput, 1, 3)
+              if (angle > 0) {
+                // Print out the angle corresponding to the angle number inputted
+                console.log(`The angle is ${triangle.angle(angle)} °`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-3
                 console.log('Please enter a valid number')
               }
@@ -237,21 +248,12 @@ while (!endProgram) {
             case '8': {
               // Get the height number from the user
               const heightInput = createPrompt('Enter a side number for the height: ')
-              try {
-                if (heightInput.value !== null) {
-                  // Parse the input to an integer
-                  const height = parseInt(heightInput.value)
-                  if (isNaN(height)) {
-                    throw new Error('Invalid number')
-                  } else if (height <= 0 || height > 3) {
-                    throw new Error('Invalid number')
-                  } else {
-                    console.log(`The height is ${triangle.height(height)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const height = errorChecker(heightInput, 1, 3)
+              if (height > 0) {
+                // Print out the height corresponding to the height number inputted
+                console.log(`The height is ${triangle.height(height)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-3
                 console.log('Please enter a valid number')
               }
@@ -310,13 +312,7 @@ while (!endProgram) {
       while (!endProgram2) {
         // Show the information for the shape
         if (showInformation) {
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"7" for type of quadrilateral')
           console.log('"x" to exit')
           showInformation = false
@@ -339,22 +335,12 @@ while (!endProgram) {
             case '2': {
               // Get the side number from the user
               const sideLengthInput = createPrompt('Enter a side number: ')
-              try {
-                if (sideLengthInput.value !== null) {
-                  // Parse the input to an integer
-                  const sideLength = parseInt(sideLengthInput.value)
-                  if (isNaN(sideLength)) {
-                    throw new Error('Invalid number')
-                  } else if (sideLength <= 0 || sideLength > 4) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the side length
-                    console.log(`The side length is ${quadrilateral.getSideLength(sideLength)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const sideLength = errorChecker(sideLengthInput, 1, 4)
+              if (sideLength > 0) {
+                // Print out the side length
+                console.log(`The side length is ${quadrilateral.getSideLength(sideLength)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-4
                 console.log('Please enter a valid number')
               }
@@ -380,23 +366,13 @@ while (!endProgram) {
             case '5': {
               // Get the angle number from the user
               const angleInput = createPrompt('Enter an angle number: ')
-              try {
-                if (angleInput.value !== null) {
-                  // Parse the input to an integer
-                  const angle = parseInt(angleInput.value)
-                  if (isNaN(angle)) {
-                    throw new Error('Invalid number')
-                  } else if (angle <= 0 || angle > 4) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the angle corresponding to the angle number inputted
-                    console.log(`The angle is ${quadrilateral.angle(angle)} °`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
+              // Function to check if the input is valid
+              const angle = errorChecker(angleInput, 1, 4)
+              if (angle > 0) {
+                // Print out the angle corresponding to the angle number inputted
+                console.log(`The angle is ${quadrilateral.angle(angle)} °`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-4
-              } catch (error) {
                 console.log('Please enter a valid number')
               }
               break
@@ -454,13 +430,7 @@ while (!endProgram) {
       while (!endProgram3) {
         // Show the information for the shape
         if (showInformation) {
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -482,22 +452,12 @@ while (!endProgram) {
             case '2': {
               // Get the side number
               const sideLengthInput = createPrompt('Enter a side number: ')
-              try {
-                if (sideLengthInput.value !== null) {
-                  // Parse the input to an integer
-                  const sideLength = parseInt(sideLengthInput.value)
-                  if (isNaN(sideLength)) {
-                    throw new Error('Invalid number')
-                  } else if (sideLength <= 0 || sideLength > 5) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the side length
-                    console.log(`The side length is ${pentagon.getSideLength(sideLength)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const sideLength = errorChecker(sideLengthInput, 1, 5)
+              if (sideLength > 0) {
+                // Print out the side length
+                console.log(`The side length is ${pentagon.getSideLength(sideLength)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-5
                 console.log('Please enter a valid number')
               }
@@ -523,22 +483,12 @@ while (!endProgram) {
             case '5': {
               // Get the angle number from the user
               const angleInput = createPrompt('Enter an angle number: ')
-              try {
-                if (angleInput.value !== null) {
-                  // Parse the input to an integer
-                  const angle = parseInt(angleInput.value)
-                  if (isNaN(angle)) {
-                    throw new Error('Invalid number')
-                  } else if (angle <= 0 || angle > 5) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the angle corresponding to the angle number inputted
-                    console.log(`The angle is ${pentagon.angle(angle)} °`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const angle = errorChecker(angleInput, 1, 5)
+              if (angle > 0) {
+                // Print out the angle corresponding to the angle number inputted
+                console.log(`The angle is ${pentagon.angle(angle)} °`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-5
                 console.log('Please enter a valid number')
               }
@@ -591,13 +541,7 @@ while (!endProgram) {
       while (!endProgram4) {
         // Show the information for the shape
         if (showInformation) {
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -619,22 +563,12 @@ while (!endProgram) {
             case '2': {
               // Get the side number from the user
               const sideLengthInput = createPrompt('Enter a side number: ')
-              try {
-                if (sideLengthInput.value !== null) {
-                  // Parse the input to an integer
-                  const sideLength = parseInt(sideLengthInput.value)
-                  if (isNaN(sideLength)) {
-                    throw new Error('Invalid number')
-                  } else if (sideLength <= 0 || sideLength > 6) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the side length
-                    console.log(`The side length is ${hexagon.getSideLength(sideLength)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const sideLength = errorChecker(sideLengthInput, 1, 6)
+              if (sideLength > 0) {
+                // Print out the side length
+                console.log(`The side length is ${hexagon.getSideLength(sideLength)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-6
                 console.log('Please enter a valid number')
               }
@@ -660,22 +594,12 @@ while (!endProgram) {
             case '5': {
               // Get the angle number from the user
               const angleInput = createPrompt('Enter an angle number: ')
-              try {
-                if (angleInput.value !== null) {
-                  // Parse the input to an integer
-                  const angle = parseInt(angleInput.value)
-                  if (isNaN(angle)) {
-                    throw new Error('Invalid number')
-                  } else if (angle <= 0 || angle > 6) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the angle corresponding to the angle number inputted
-                    console.log(`The angle is ${hexagon.angle(angle)} °`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const angle = errorChecker(angleInput, 1, 6)
+              if (angle > 0) {
+                // Print out the angle corresponding to the angle number inputted
+                console.log(`The angle is ${hexagon.angle(angle)} °`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-6
                 console.log('Please enter a valid number')
               }
@@ -728,13 +652,7 @@ while (!endProgram) {
       while (!endProgram5) {
         if (showInformation) {
           // Show the information for the shape
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -756,22 +674,12 @@ while (!endProgram) {
             case '2': {
               // Get the side number from the user
               const sideLengthInput = createPrompt('Enter a side number: ')
-              try {
-                if (sideLengthInput.value !== null) {
-                  // Parse the input to an integer
-                  const sideLength = parseInt(sideLengthInput.value)
-                  if (isNaN(sideLength)) {
-                    throw new Error('Invalid number')
-                  } else if (sideLength <= 0 || sideLength > 7) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the side length
-                    console.log(`The side length is ${heptagon.getSideLength(sideLength)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const sideLength = errorChecker(sideLengthInput, 1, 7)
+              if (sideLength > 0) {
+                // Print out the side length
+                console.log(`The side length is ${heptagon.getSideLength(sideLength)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-7
                 console.log('Please enter a valid number')
               }
@@ -797,22 +705,12 @@ while (!endProgram) {
             case '5': {
               // Get the angle number from the user
               const angleInput = createPrompt('Enter an angle number: ')
-              try {
-                if (angleInput.value !== null) {
-                  // Parse the input to an integer
-                  const angle = parseInt(angleInput.value)
-                  if (isNaN(angle)) {
-                    throw new Error('Invalid number')
-                  } else if (angle <= 0 || angle > 7) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the angle corresponding to the angle number inputted
-                    console.log(`The angle is ${heptagon.angle(angle)} °`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const angle = errorChecker(angleInput, 1, 7)
+              if (angle > 0) {
+                // Print out the angle corresponding to the angle number inputted
+                console.log(`The angle is ${heptagon.angle(angle)} °`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-7
                 console.log('Please enter a valid number')
               }
@@ -865,13 +763,7 @@ while (!endProgram) {
       while (!endProgram6) {
         if (showInformation) {
           // Show the information for the shape
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -893,22 +785,12 @@ while (!endProgram) {
             case '2': {
               // Get the side number from the user
               const sideLengthInput = createPrompt('Enter a side number: ')
-              try {
-                if (sideLengthInput.value !== null) {
-                  // Parse the input to an integer
-                  const sideLength = parseInt(sideLengthInput.value)
-                  if (isNaN(sideLength)) {
-                    throw new Error('Invalid number')
-                  } else if (sideLength <= 0 || sideLength > 8) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the side length
-                    console.log(`The side length is ${octogon.getSideLength(sideLength)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const sideLength = errorChecker(sideLengthInput, 1, 8)
+              if (sideLength > 0) {
+                // Print out the side length
+                console.log(`The side length is ${octogon.getSideLength(sideLength)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-8
                 console.log('Please enter a valid number')
               }
@@ -934,22 +816,12 @@ while (!endProgram) {
             case '5': {
               // Get the angle number from the user
               const angleInput = createPrompt('Enter an angle number: ')
-              try {
-                if (angleInput.value !== null) {
-                  // Parse the input to an integer
-                  const angle = parseInt(angleInput.value)
-                  if (isNaN(angle)) {
-                    throw new Error('Invalid number')
-                  } else if (angle <= 0 || angle > 8) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the angle corresponding to the angle number inputted
-                    console.log(`The angle is ${octogon.angle(angle)} °`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const angle = errorChecker(angleInput, 1, 8)
+              if (angle > 0) {
+                // Print out the angle corresponding to the angle number inputted
+                console.log(`The angle is ${octogon.angle(angle)} °`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-8
                 console.log('Please enter a valid number')
               }
@@ -1002,13 +874,7 @@ while (!endProgram) {
       while (!endProgram7) {
         if (showInformation) {
           // Show the information for the shape
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -1030,22 +896,12 @@ while (!endProgram) {
             case '2': {
               // Get the side number from the user
               const sideLengthInput = createPrompt('Enter a side number: ')
-              try {
-                if (sideLengthInput.value !== null) {
-                  // Parse the input to an integer
-                  const sideLength = parseInt(sideLengthInput.value)
-                  if (isNaN(sideLength)) {
-                    throw new Error('Invalid number')
-                  } else if (sideLength <= 0 || sideLength > 9) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the side length
-                    console.log(`The side length is ${nonagon.getSideLength(sideLength)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const sideLength = errorChecker(sideLengthInput, 1, 9)
+              if (sideLength > 0) {
+                // Print out the side length
+                console.log(`The side length is ${nonagon.getSideLength(sideLength)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-9
                 console.log('Please enter a valid number')
               }
@@ -1071,22 +927,12 @@ while (!endProgram) {
             case '5': {
               // Get the angle number from the user
               const angleInput = createPrompt('Enter an angle number: ')
-              try {
-                if (angleInput.value !== null) {
-                  // Parse the input to an integer
-                  const angle = parseInt(angleInput.value)
-                  if (isNaN(angle)) {
-                    throw new Error('Invalid number')
-                  } else if (angle <= 0 || angle > 9) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the angle corresponding to the angle number inputted
-                    console.log(`The angle is ${nonagon.angle(angle)} °`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const angle = errorChecker(angleInput, 1, 9)
+              if (angle > 0) {
+                // Print out the angle corresponding to the angle number inputted
+                console.log(`The angle is ${nonagon.angle(angle)} °`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-9
                 console.log('Please enter a valid number')
               }
@@ -1139,13 +985,7 @@ while (!endProgram) {
       while (!endProgram8) {
         if (showInformation) {
           // Show the information for the shape
-          console.log('\nHere are the options for your shape.')
-          console.log('"1" for name of shape')
-          console.log('"2" for side lengths')
-          console.log('"3" for perimeter')
-          console.log('"4" for to see if the shape is regular')
-          console.log('"5" for angles')
-          console.log('"6" for area')
+          basicInfo()
           console.log('"x" to exit')
           showInformation = false
         }
@@ -1167,22 +1007,12 @@ while (!endProgram) {
             case '2': {
               // Get the side number from the user
               const sideLengthInput = createPrompt('Enter a side number: ')
-              try {
-                if (sideLengthInput.value !== null) {
-                  // Parse the input to an integer
-                  const sideLength = parseInt(sideLengthInput.value)
-                  if (isNaN(sideLength)) {
-                    throw new Error('Invalid number')
-                  } else if (sideLength <= 0 || sideLength > 10) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the side length
-                    console.log(`The side length is ${decagon.getSideLength(sideLength)}`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const sideLength = errorChecker(sideLengthInput, 1, 10)
+              if (sideLength > 0) {
+                // Print out the side length
+                console.log(`The side length is ${decagon.getSideLength(sideLength)}`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-10
                 console.log('Please enter a valid number')
               }
@@ -1208,22 +1038,12 @@ while (!endProgram) {
             case '5': {
               // Get the angle number from the user
               const angleInput = createPrompt('Enter an angle number: ')
-              try {
-                if (angleInput.value !== null) {
-                  // Parse the input to an integer
-                  const angle = parseInt(angleInput.value)
-                  if (isNaN(angle)) {
-                    throw new Error('Invalid number')
-                  } else if (angle <= 0 || angle > 10) {
-                    throw new Error('Invalid number')
-                  } else {
-                    // Print out the angle corresponding to the angle number inputted
-                    console.log(`The angle is ${decagon.angle(angle)} °`)
-                  }
-                } else {
-                  throw new Error('Invalid number')
-                }
-              } catch (error) {
+              // Function to check if the input is valid
+              const angle = errorChecker(angleInput, 1, 10)
+              if (angle > 0) {
+                // Print out the angle corresponding to the angle number inputted
+                console.log(`The angle is ${decagon.angle(angle)} °`)
+              } else {
                 // Show an error if the input is null, NaN, or not between 1-10
                 console.log('Please enter a valid number')
               }
