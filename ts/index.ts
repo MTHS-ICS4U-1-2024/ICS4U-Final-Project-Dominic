@@ -16,7 +16,7 @@ import { Octagon } from './Shapes/Octagon'
 import { Nonagon } from './Shapes/Nonagon'
 import { Decagon } from './Shapes/Decagon'
 
-function basicInfo () {
+function basicInfo (): void {
   console.log('\nHere are the options for your shape.')
   console.log('"1" for name of shape')
   console.log('"2" for side lengths')
